@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Baby Shower</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+<audio autoplay loop>
+    <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <h1>👶 Baby Shower 👶</h1>
+    <p>Te invitamos a celebrar la llegada de nuestro bebé</p>
+
+    <h3>📅 20 de Julio 2025 | ⏰ 4:00 PM</h3>
+
+    <!-- CUENTA REGRESIVA -->
+    <div id="contador">
+        <div><span id="dias"></span>Días</div>
+        <div><span id="horas"></span>Horas</div>
+        <div><span id="minutos"></span>Min</div>
+        <div><span id="segundos"></span>Seg</div>
+    </div>
+
+    <!-- MAPA -->
+    <h3>📍 Ubicación</h3>
+    <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.086356064793!2d-122.4194!3d37.7749"
+        allowfullscreen=""
+        loading="lazy">
+    </iframe>
+
+    <!-- LISTA DE REGALOS -->
+    <h3>🎁 Lista de Regalos</h3>
+    <ul class="regalos">
+        <li>🍼 Pañales</li>
+        <li>👕 Ropita 0-6 meses</li>
+        <li>🧴 Artículos de higiene</li>
+        <li>🛏️ Cobijas</li>
+        <li>🎀 Juguetes suaves</li>
+    </ul>
+
+    <button onclick="mostrarFormulario()">Confirmar asistencia</button>
+
+    <!-- FORMULARIO -->
+    <form id="formulario" class="oculto">
+        <input type="text" id="nombre" placeholder="Nombre completo" required>
+        <input type="text" id="telefono" placeholder="Teléfono" required>
+        <select id="asistencia" required>
+            <option value="">¿Asistirás?</option>
+            <option value="Sí">Sí</option>
+            <option value="No">No</option>
+        </select>
+        <button type="submit">Enviar</button>
+    </form>
+</div>
+
+<!-- WHATSAPP -->
+<a href="https://wa.me/521XXXXXXXXXX" class="whatsapp" target="_blank">
+    <i class="fab fa-whatsapp"></i>
+</a>
+
+<script src="script.js"></script>
+</body>
+</html>
