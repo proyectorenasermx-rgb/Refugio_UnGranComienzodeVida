@@ -9,13 +9,13 @@ body {
 .btn-musica {
     background: #f48fb1;
     border: none;
-    padding: 10px 15px;
-    border-radius: 15px;
+    padding: 10px 16px;
+    border-radius: 20px;
     color: white;
     cursor: pointer;
+    font-size: 14px;
     margin-bottom: 15px;
 }
-
 .container {
     background: white;
     border-radius: 20px;
