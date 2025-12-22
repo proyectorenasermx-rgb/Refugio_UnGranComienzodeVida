@@ -2,7 +2,18 @@ body {
     font-family: Arial, sans-serif;
     background: linear-gradient(#fdeff9, #ec38bc);
     text-align: center;
+    margin: 0;
     padding: 20px;
+}
+
+.btn-musica {
+    background: #f48fb1;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 15px;
+    color: white;
+    cursor: pointer;
+    margin-bottom: 15px;
 }
 
 .container {
