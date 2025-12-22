@@ -3,8 +3,18 @@ function mostrarFormulario() {
 }
 function reproducirMusica() {
     const audio = document.getElementById("musica");
+    const btn = document.getElementById("btnMusica");
     audio.play();
 }
+btn.addEventListener("click", () => {
+    if (audio.paused) {
+        audio.play();
+        btn.textContent = "⏸️ Pausar música";
+    } else {
+        audio.pause();
+        btn.textContent = "▶️ Música";
+    }
+});
 /* ENVÍO A GOOGLE SHEETS */
 document.getElementById("formulario").addEventListener("submit", function(e) {
     e.preventDefault();
