@@ -1,7 +1,10 @@
 function mostrarFormulario() {
     document.getElementById("formulario").classList.toggle("oculto");
 }
-
+function reproducirMusica() {
+    const audio = document.getElementById("musica");
+    audio.play();
+}
 /* ENVÍO A GOOGLE SHEETS */
 document.getElementById("formulario").addEventListener("submit", function(e) {
     e.preventDefault();
