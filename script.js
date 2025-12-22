@@ -25,7 +25,7 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
 });
 
 /* CUENTA REGRESIVA */
-const fechaEvento = new Date("July 20, 2025 16:00:00").getTime();
+const fechaEvento = new Date("July 15, 2025 16:00:00").getTime();
 
 setInterval(() => {
     const ahora = new Date().getTime();
