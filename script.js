@@ -1,11 +1,7 @@
-function mostrarFormulario() {
-    document.getElementById("formulario").classList.toggle("oculto");
-}
-function reproducirMusica() {
-    const audio = document.getElementById("musica");
-    const btn = document.getElementById("btnMusica");
-    audio.play();
-}
+// BOTÓN MÚSICA
+const audio = document.getElementById("musica");
+const btn = document.getElementById("btnMusica");
+
 btn.addEventListener("click", () => {
     if (audio.paused) {
         audio.play();
@@ -15,14 +11,19 @@ btn.addEventListener("click", () => {
         btn.textContent = "▶️ Música";
     }
 });
-/* ENVÍO A GOOGLE SHEETS */
+
+// FORMULARIO
+function mostrarFormulario() {
+    document.getElementById("formulario").classList.toggle("oculto");
+}
+
 document.getElementById("formulario").addEventListener("submit", function(e) {
     e.preventDefault();
 
     const data = {
-        nombre: nombre.value,
-        telefono: telefono.value,
-        asistencia: asistencia.value
+        nombre: document.getElementById("nombre").value,
+        telefono: document.getElementById("telefono").value,
+        asistencia: document.getElementById("asistencia").value
     };
 
     fetch("TU_URL_DE_APPS_SCRIPT", {
@@ -34,15 +35,19 @@ document.getElementById("formulario").addEventListener("submit", function(e) {
     .catch(() => alert("Error al enviar"));
 });
 
-/* CUENTA REGRESIVA */
+// CUENTA REGRESIVA
 const fechaEvento = new Date("July 15, 2025 16:00:00").getTime();
 
 setInterval(() => {
     const ahora = new Date().getTime();
     const diferencia = fechaEvento - ahora;
 
-    document.getElementById("dias").innerText = Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    document.getElementById("horas").innerText = Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-    document.getElementById("minutos").innerText = Math.floor((diferencia / (1000 * 60)) % 60);
-    document.getElementById("segundos").innerText = Math.floor((diferencia / 1000) % 60);
+    document.getElementById("dias").innerText =
+        Math.floor(diferencia / (1000 * 60 * 60 * 24));
+    document.getElementById("horas").innerText =
+        Math.floor((diferencia / (1000 * 60 * 60)) % 24);
+    document.getElementById("minutos").innerText =
+        Math.floor((diferencia / (1000 * 60)) % 60);
+    document.getElementById("segundos").innerText =
+        Math.floor((diferencia / 1000) % 60);
 }, 1000);
