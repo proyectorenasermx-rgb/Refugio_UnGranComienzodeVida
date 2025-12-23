@@ -1,31 +1,25 @@
-// BOTÓN MÚSICA
+// MÚSICA
 const audio = document.getElementById("musica");
-const btn = document.getElementById("btnMusica");
+const btnMusica = document.getElementById("btnMusica");
 
-btn.addEventListener("click", () => {
+audio.volume = 0.4;
+
+btnMusica.addEventListener("click", () => {
     if (audio.paused) {
         audio.play();
-        btn.textContent = "⏸️ Pausar música";
+        btnMusica.innerHTML = '<i class="fa-solid fa-pause"></i>';
     } else {
         audio.pause();
-        btn.textContent = "▶️ Música";
+        btnMusica.innerHTML = '<i class="fa-solid fa-music"></i>';
     }
 });
-const esMovil = window.matchMedia("(max-width: 768px)").matches;
-
-if (!esMovil) {
-    audio.volume = 0.3;
-} else {
-    audio.volume = 0.6;
-}
-
 
 // FORMULARIO
 function mostrarFormulario() {
     document.getElementById("formulario").classList.toggle("oculto");
 }
 
-document.getElementById("formulario").addEventListener("submit", function(e) {
+document.getElementById("formulario").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const data = {
@@ -50,12 +44,12 @@ setInterval(() => {
     const ahora = new Date().getTime();
     const diferencia = fechaEvento - ahora;
 
-    document.getElementById("dias").innerText =
+    document.getElementById("dias").textContent =
         Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    document.getElementById("horas").innerText =
+    document.getElementById("horas").textContent =
         Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-    document.getElementById("minutos").innerText =
+    document.getElementById("minutos").textContent =
         Math.floor((diferencia / (1000 * 60)) % 60);
-    document.getElementById("segundos").innerText =
+    document.getElementById("segundos").textContent =
         Math.floor((diferencia / 1000) % 60);
 }, 1000);
