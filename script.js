@@ -1,14 +1,20 @@
-fetch(URL_SCRIPT)
-  .then(res => res.json())
-  .then(regalosOcupados => {
-    document.querySelectorAll(".regalos li").forEach(li => {
-      if (regalosOcupados.includes(li.textContent.trim())) {
-        li.classList.add("bloqueado");
-      }
-    });
-  });
-
 document.addEventListener("DOMContentLoaded", function () {
+
+    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyGMrtlVuumCTWYga6rqb96U7erfKx-1j9Pn5-UJr3Ift4KldxBnBZyIwqgNZyLFPw2/exec";
+
+    // =====================
+    // BLOQUEAR REGALOS DESDE SHEETS
+    // =====================
+    fetch(URL_SCRIPT)
+        .then(res => res.json())
+        .then(regalosOcupados => {
+            document.querySelectorAll(".regalos li").forEach(li => {
+                if (regalosOcupados.includes(li.textContent.trim())) {
+                    li.classList.add("bloqueado");
+                }
+            });
+        })
+        .catch(() => console.warn("No se pudieron cargar regalos bloqueados"));
 
     // =====================
     // BOTÓN MÚSICA
@@ -27,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // =====================
-    // ABRIR / CERRAR FORMULARIO
+    // FORMULARIO
     // =====================
     const btnFormulario = document.getElementById("btnFormulario");
     const formulario = document.getElementById("formulario");
@@ -37,13 +43,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // =====================
-    // SELECCIÓN DE REGALOS
+    // REGALOS
     // =====================
     let regalosSeleccionados = [];
     const regalos = document.querySelectorAll(".regalos li");
 
     regalos.forEach(item => {
         item.addEventListener("click", () => {
+
+            if (item.classList.contains("bloqueado")) return;
+
             item.classList.toggle("seleccionado");
 
             const texto = item.textContent.trim();
@@ -56,7 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // =====================
-    // BOTONES SÍ / NO
+    // ASISTENCIA
     // =====================
     let asistenciaSeleccionada = "";
     const botonesAsistencia = document.querySelectorAll(".btn-asistencia");
@@ -72,8 +81,6 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================
     // ENVÍO A GOOGLE SHEETS
     // =====================
-    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyGMrtlVuumCTWYga6rqb96U7erfKx-1j9Pn5-UJr3Ift4KldxBnBZyIwqgNZyLFPw2/exec";
-
     formulario.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -93,21 +100,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 regalos: regalosSeleccionados.join(", ")
             })
         })
-       .then(() => {
-  alert("¡Confirmación enviada! 💕");
+        .then(() => {
+            alert("¡Confirmación enviada! 💕");
 
-  formulario.reset();
-  formulario.classList.add("oculto");
+            formulario.reset();
+            formulario.classList.add("oculto");
 
-  regalosSeleccionados = [];
-  asistenciaSeleccionada = "";
+            regalosSeleccionados = [];
+            asistenciaSeleccionada = "";
 
-  regalos.forEach(r => r.classList.remove("seleccionado"));
-  botonesAsistencia.forEach(b => b.classList.remove("activo"));
+            regalos.forEach(r => r.classList.remove("seleccionado"));
+            botonesAsistencia.forEach(b => b.classList.remove("activo"));
 
-  btnFormulario.textContent = "Enviar otra asistencia";
-});
-
+            btnFormulario.textContent = "Enviar otra asistencia";
+        });
+    });
 
     // =====================
     // CUENTA REGRESIVA 2026
