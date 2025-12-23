@@ -14,42 +14,41 @@ btnMusica.addEventListener("click", () => {
     }
 });
 
+// REGALOS
+function seleccionarRegalo(el) {
+    el.classList.toggle("seleccionado");
+}
+
 // FORMULARIO
 function mostrarFormulario() {
     document.getElementById("formulario").classList.toggle("oculto");
 }
 
-document.getElementById("formulario").addEventListener("submit", function (e) {
+// WHATSAPP AUTO
+document.getElementById("formulario").addEventListener("submit", function(e) {
     e.preventDefault();
 
-    const data = {
-        nombre: document.getElementById("nombre").value,
-        telefono: document.getElementById("telefono").value,
-        asistencia: document.getElementById("asistencia").value
-    };
+    const nombre = document.getElementById("nombre").value;
+    const asistencia = document.getElementById("asistencia").value;
 
-    fetch("TU_URL_DE_APPS_SCRIPT", {
-        method: "POST",
-        body: JSON.stringify(data),
-        headers: { "Content-Type": "application/json" }
-    })
-    .then(() => alert("¡Gracias por confirmar! 💕"))
-    .catch(() => alert("Error al enviar"));
+    const mensaje = `¡Hola!\n\nSoy ${nombre}.\nConfirmo asistencia: ${asistencia}.`;
+
+    document.getElementById("btnWhats").href =
+        "https://wa.me/525614454159?text=" + encodeURIComponent(mensaje);
+
+    alert("¡Confirmación enviada! 💕");
 });
 
 // CUENTA REGRESIVA
-const fechaEvento = new Date("July 15, 2025 16:00:00").getTime();
+const fechaEvento = new Date("2025-07-15T16:00:00").getTime();
 
 setInterval(() => {
     const ahora = new Date().getTime();
-    const diferencia = fechaEvento - ahora;
+    let diff = fechaEvento - ahora;
+    if (diff < 0) diff = 0;
 
-    document.getElementById("dias").textContent =
-        Math.floor(diferencia / (1000 * 60 * 60 * 24));
-    document.getElementById("horas").textContent =
-        Math.floor((diferencia / (1000 * 60 * 60)) % 24);
-    document.getElementById("minutos").textContent =
-        Math.floor((diferencia / (1000 * 60)) % 60);
-    document.getElementById("segundos").textContent =
-        Math.floor((diferencia / 1000) % 60);
+    dias.textContent = Math.floor(diff / (1000 * 60 * 60 * 24));
+    horas.textContent = Math.floor((diff / (1000 * 60 * 60)) % 24);
+    minutos.textContent = Math.floor((diff / (1000 * 60)) % 60);
+    segundos.textContent = Math.floor((diff / 1000) % 60);
 }, 1000);
