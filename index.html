@@ -3,43 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <title>Baby Shower</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- CSS -->
     <link rel="stylesheet" href="styles.css">
-    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet"
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
 </head>
 <body>
 
+<!-- AUDIO -->
 <audio id="musica" loop>
     <source src="bobmarleybaby.mp3" type="audio/mpeg">
 </audio>
 
-<button id="btnMusica" class="btn-musica">
-    ▶️ Música
-</button>
-
+<!-- CONTENEDOR PRINCIPAL -->
 <div class="container">
     <h1>👶 Baby Shower 👶</h1>
     <p>Te invitamos a celebrar la llegada de nuestro bebé</p>
 
-    <h3>📅 285 de Julio 2025 | ⏰ 4:00 PM</h3>
+    <h3>📅 15 de Julio 2025 | ⏰ 4:00 PM</h3>
 
     <!-- CUENTA REGRESIVA -->
     <div id="contador">
-        <div><span id="dias"></span>Días</div>
-        <div><span id="horas"></span>Horas</div>
-        <div><span id="minutos"></span>Min</div>
-        <div><span id="segundos"></span>Seg</div>
+        <div><span id="dias"></span><small>Días</small></div>
+        <div><span id="horas"></span><small>Horas</small></div>
+        <div><span id="minutos"></span><small>Min</small></div>
+        <div><span id="segundos"></span><small>Seg</small></div>
     </div>
 
     <!-- MAPA -->
     <h3>📍 Ubicación</h3>
-    <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d861.2235052546845!2d-99.02222722536341!3d19.394598564662655!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1fdba5a8e6fbb%3A0xce4dfeb8b07a54b6!2s%23NavaCasa!5e1!3m2!1ses-419!2smx!4v1766440211290!5m2!1ses-419!2smx" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen=""
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d861.2235052546845!2d-99.02222722536341!3d19.394598564662655"
+        allowfullscreen
         loading="lazy">
     </iframe>
 
-    <!-- LISTA DE REGALOS -->
-    <h3>🎁 Lista de Regalos</h3>
+    <!-- REGALOS -->
+    <h3>🎁 Lista de regalos</h3>
     <ul class="regalos">
         <li>🍼 Pañales</li>
         <li>👕 Ropita 0-6 meses</li>
@@ -63,12 +68,19 @@
     </form>
 </div>
 
-<!-- WHATSAPP -->
+<!-- BOTÓN MÚSICA (ARRIBA) -->
+<button id="btnMusica" class="btn-float musica">
+    <i class="fa-solid fa-music"></i>
+</button>
+
+<!-- BOTÓN WHATSAPP (ABAJO) -->
 <a href="https://wa.me/525614454159/?text=%C2%A1Hola%21%0A%0ALe%20mandamos%20un%20cordial%20saludo."
-   class="whatsapp"
+   class="btn-float whatsapp"
    target="_blank">
    <i class="fa-brands fa-whatsapp"></i>
 </a>
+
+<!-- JS -->
 <script src="script.js"></script>
 </body>
 </html>
