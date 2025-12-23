@@ -1,3 +1,13 @@
+fetch(URL_SCRIPT)
+  .then(res => res.json())
+  .then(regalosOcupados => {
+    document.querySelectorAll(".regalos li").forEach(li => {
+      if (regalosOcupados.includes(li.textContent.trim())) {
+        li.classList.add("bloqueado");
+      }
+    });
+  });
+
 document.addEventListener("DOMContentLoaded", function () {
 
     // =====================
