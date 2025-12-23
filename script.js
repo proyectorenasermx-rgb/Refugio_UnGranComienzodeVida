@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyGMrtlVuumCTWYga6rqb96U7erfKx-1j9Pn5-UJr3Ift4KldxBnBZyIwqgNZyLFPw2/exec";
 
-    // =====================
+  /*  // =====================
     // BLOQUEAR REGALOS DESDE SHEETS
     // =====================
     fetch(URL_SCRIPT)
@@ -15,7 +15,7 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         })
         .catch(() => console.warn("No se pudieron cargar regalos bloqueados"));
-
+*/
     // =====================
     // BOTÓN MÚSICA
     // =====================
