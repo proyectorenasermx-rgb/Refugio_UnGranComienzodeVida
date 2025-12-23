@@ -93,19 +93,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 regalos: regalosSeleccionados.join(", ")
             })
         })
-        .then(() => {
-            alert("¡Confirmación enviada! 💕");
-            formulario.reset();
-            formulario.classList.add("oculto");
+       .then(() => {
+  alert("¡Confirmación enviada! 💕");
 
-            // reset visual
-            botonesAsistencia.forEach(b => b.classList.remove("activo"));
-            regalos.forEach(r => r.classList.remove("seleccionado"));
-            regalosSeleccionados = [];
-            asistenciaSeleccionada = "";
-        })
-        .catch(() => alert("Error al enviar 😥"));
-    });
+  formulario.reset();
+  formulario.classList.add("oculto");
+
+  regalosSeleccionados = [];
+  asistenciaSeleccionada = "";
+
+  regalos.forEach(r => r.classList.remove("seleccionado"));
+  botonesAsistencia.forEach(b => b.classList.remove("activo"));
+
+  btnFormulario.textContent = "Enviar otra asistencia";
+});
+
 
     // =====================
     // CUENTA REGRESIVA 2026
