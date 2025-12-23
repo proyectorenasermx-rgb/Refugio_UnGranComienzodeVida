@@ -69,6 +69,13 @@ iframe {
     transform: scale(1.05);
 }
 
+.regalos li.bloqueado {
+  background: #eee;
+  color: #999;
+  pointer-events: none;
+  text-decoration: line-through;
+}
+
 /* BOTONES */
 .btn-principal {
     background: #ec38bc;
