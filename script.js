@@ -11,6 +11,14 @@ btn.addEventListener("click", () => {
         btn.textContent = "▶️ Música";
     }
 });
+const esMovil = window.matchMedia("(max-width: 768px)").matches;
+
+if (!esMovil) {
+    audio.volume = 0.3;
+} else {
+    audio.volume = 0.6;
+}
+
 
 // FORMULARIO
 function mostrarFormulario() {
