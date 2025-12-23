@@ -46,56 +46,36 @@ function mostrarFormulario() {
 // =====================
 // ENVÍO A GOOGLE SHEETS
 // =====================
-document.getElementById("formulario").addEventListener("submit", function(e) {
+document.getElementById("formulario").addEventListener("submit", function (e) {
     e.preventDefault();
 
-    const nombre = document.getElementById("nombre").value.trim();
-    const telefono = document.getElementById("telefono").value.trim();
-    const asistencia = document.getElementById("asistencia").value;
-
-    if (!asistencia) {
-        alert("Por favor selecciona si asistirás 😊");
-        return;
-    }
-
-    const regalos = Array.from(document.querySelectorAll(".regalos li.seleccionado"))
-        .map(li => li.textContent.trim())
-        .join(", ");
-
-    const payload = {
-        nombre,
-        telefono,
-        asistencia,
-        regalos
+    const data = {
+        nombre: document.getElementById("nombre").value,
+        telefono: document.getElementById("telefono").value,
+        asistencia: document.getElementById("asistencia").value,
+        regalos: regalosSeleccionados.join(", ")
     };
 
     fetch("https://script.google.com/macros/s/AKfycbyGMrtlVuumCTWYga6rqb96U7erfKx-1j9Pn5-UJr3Ift4KldxBnBZyIwqgNZyLFPw2/exec", {
         method: "POST",
-        body: JSON.stringify(payload),
-        headers: { "Content-Type": "application/json" }
+        mode: "no-cors",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
     })
     .then(() => {
-        alert("¡Confirmación enviada! 💕");
-
-        const mensaje = `¡Hola!\n\nSoy ${nombre}.\nConfirmo asistencia: ${asistencia}.\nRegalos: ${regalos || "Aún no decidido"}.`;
-
-        window.open(
-            "https://wa.me/525614454159?text=" + encodeURIComponent(mensaje),
-            "_blank"
-        );
-
+        alert("¡Confirmación enviada con éxito! 💕");
         document.getElementById("formulario").reset();
-        document.getElementById("formulario").classList.add("oculto");
     })
     .catch(() => {
         alert("Ocurrió un error, intenta nuevamente 😥");
     });
 });
-
 // =====================
 // CUENTA REGRESIVA (CORRECTA)
 // =====================
-const fechaEvento = new Date("2025-07-15T16:00:00").getTime();
+const fechaEvento = new Date("2026-07-15T16:00:00").getTime();
 
 setInterval(() => {
     const ahora = new Date().getTime();
