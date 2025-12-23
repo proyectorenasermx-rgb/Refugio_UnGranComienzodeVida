@@ -1,21 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
 
-    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyGMrtlVuumCTWYga6rqb96U7erfKx-1j9Pn5-UJr3Ift4KldxBnBZyIwqgNZyLFPw2/exec";
-
-  /*  // =====================
-    // BLOQUEAR REGALOS DESDE SHEETS
-    // =====================
-    fetch(URL_SCRIPT)
-        .then(res => res.json())
-        .then(regalosOcupados => {
-            document.querySelectorAll(".regalos li").forEach(li => {
-                if (regalosOcupados.includes(li.textContent.trim())) {
-                    li.classList.add("bloqueado");
-                }
-            });
-        })
-        .catch(() => console.warn("No se pudieron cargar regalos bloqueados"));
-*/
     // =====================
     // BOTÓN MÚSICA
     // =====================
@@ -33,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // =====================
-    // FORMULARIO
+    // ABRIR / CERRAR FORMULARIO
     // =====================
     const btnFormulario = document.getElementById("btnFormulario");
     const formulario = document.getElementById("formulario");
@@ -43,16 +27,13 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // =====================
-    // REGALOS
+    // SELECCIÓN DE REGALOS
     // =====================
     let regalosSeleccionados = [];
     const regalos = document.querySelectorAll(".regalos li");
 
     regalos.forEach(item => {
         item.addEventListener("click", () => {
-
-            if (item.classList.contains("bloqueado")) return;
-
             item.classList.toggle("seleccionado");
 
             const texto = item.textContent.trim();
@@ -65,7 +46,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // =====================
-    // ASISTENCIA
+    // BOTONES SÍ / NO
     // =====================
     let asistenciaSeleccionada = "";
     const botonesAsistencia = document.querySelectorAll(".btn-asistencia");
@@ -81,6 +62,8 @@ document.addEventListener("DOMContentLoaded", function () {
     // =====================
     // ENVÍO A GOOGLE SHEETS
     // =====================
+    const URL_SCRIPT = "https://script.google.com/macros/s/AKfycbyGMrtlVuumCTWYga6rqb96U7erfKx-1j9Pn5-UJr3Ift4KldxBnBZyIwqgNZyLFPw2/exec";
+
     formulario.addEventListener("submit", function (e) {
         e.preventDefault();
 
@@ -126,10 +109,17 @@ document.addEventListener("DOMContentLoaded", function () {
         const d = fechaEvento - ahora;
         if (d <= 0) return;
 
-        document.getElementById("dias").textContent = Math.floor(d / (1000 * 60 * 60 * 24));
-        document.getElementById("horas").textContent = Math.floor((d / (1000 * 60 * 60)) % 24);
-        document.getElementById("minutos").textContent = Math.floor((d / (1000 * 60)) % 60);
-        document.getElementById("segundos").textContent = Math.floor((d / 1000) % 60);
+        document.getElementById("dias").textContent =
+            Math.floor(d / (1000 * 60 * 60 * 24));
+
+        document.getElementById("horas").textContent =
+            Math.floor((d / (1000 * 60 * 60)) % 24);
+
+        document.getElementById("minutos").textContent =
+            Math.floor((d / (1000 * 60)) % 60);
+
+        document.getElementById("segundos").textContent =
+            Math.floor((d / 1000) % 60);
     }, 1000);
 
 });
