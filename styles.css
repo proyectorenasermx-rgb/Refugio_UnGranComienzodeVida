@@ -80,3 +80,38 @@ button {
     border-radius: 50%;
     text-decoration: none;
 }
+/* ===========================
+   MÓVIL (pantallas pequeñas)
+=========================== */
+@media (max-width: 768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        max-width: 100%;
+        padding: 20px;
+    }
+
+    #contador {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    iframe {
+        height: 180px;
+    }
+
+    .btn-musica {
+        width: 100%;
+        font-size: 16px;
+    }
+
+    .whatsapp {
+        bottom: 15px;
+        right: 15px;
+        font-size: 28px;
+    }
+}
+
