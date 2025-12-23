@@ -107,3 +107,26 @@ setInterval(() => {
     minutos.textContent = Math.floor((diff / (1000 * 60)) % 60);
     segundos.textContent = Math.floor((diff / 1000) % 60);
 }, 1000);
+
+// =====================
+// CONTADOR EN VIVO
+// =====================
+const URL_SHEET = "https://script.google.com/macros/s/AKfycbyGMrtlVuumCTWYga6rqb96U7erfKx-1j9Pn5-UJr3Ift4KldxBnBZyIwqgNZyLFPw2/exec";
+
+function cargarConfirmados() {
+    fetch(URL_SHEET)
+        .then(res => res.json())
+        .then(data => {
+            document.getElementById("totalConfirmados").textContent = data.total;
+            document.getElementById("confirmadosSi").textContent = data.si;
+            document.getElementById("confirmadosNo").textContent = data.no;
+        })
+        .catch(() => console.log("Error al cargar confirmados"));
+}
+
+// Cargar al iniciar
+cargarConfirmados();
+
+// Actualizar cada 10 segundos
+setInterval(cargarConfirmados, 10000);
+
