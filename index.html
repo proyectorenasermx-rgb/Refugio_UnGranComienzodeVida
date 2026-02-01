@@ -2,15 +2,31 @@
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Página Principal</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Página oficial del Refugio Un Gran Comienzo de Vida</title>
+
+    <!-- FAVICON -->
+    <link rel="icon" type="image/png" href="imagenes/favicon.png">
+
+    <!-- METADATOS PARA WHATSAPP / REDES SOCIALES -->
+    <meta property="og:title" content="Página oficial del Refugio Un Gran Comienzo de Vida">
+    <meta property="og:description" content="Página oficial del Refugio Un Gran Comienzo de Vida">
+    <meta property="og:image" content="imagenes/Presentacion.png">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="es_MX">
+
+    <!-- (RECOMENDADO) URL ABSOLUTA CUANDO LO SUBAS A INTERNET -->
+    <!-- <meta property="og:url" content="https://tusitio.com"> -->
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
-<!-- HEADER CON IMAGEN PRINCIPAL -->
-<header class="hero">
-    <img src="principal.png" alt="Imagen principal">
-    
+<!-- HEADER / IMAGEN PRINCIPAL -->
+<header class="hero" id="inicio">
+    <img src="imagenes/principal.png" alt="Imagen principal de bienvenida">
+
     <nav class="menu">
         <ul>
             <li><a href="#inicio">Inicio</a></li>
@@ -34,24 +50,35 @@
 <section class="videos">
     <div class="video-card">
         <a href="https://www.youtube.com" target="_blank">
-            <img src="video1.jpg" alt="Video 1">
-            <p>Inspiración y mensaje principal</p>
+            <img src="imagenes/video1.jpg" alt="Video de YouTube 1" loading="lazy">
+            <p>Mensaje de bienvenida</p>
         </a>
     </div>
 
     <div class="video-card">
         <a href="https://www.youtube.com" target="_blank">
-            <img src="video2.jpg" alt="Video 2">
+            <img src="imagenes/video2.jpg" alt="Video de YouTube 2" loading="lazy">
             <p>Actividades y comunidad</p>
         </a>
     </div>
 </section>
 
-<!-- SECCIÓN IMÁGENES PRINCIPALES -->
+<!-- SECCIÓN CATEGORÍAS -->
 <section class="categorias">
-    <a href="#varonil"><img src="varonil.jpg" alt="Varonil"><span>Varonil</span></a>
-    <a href="#femenil"><img src="femenil.jpg" alt="Femenil"><span>Femenil</span></a>
-    <a href="#juvenil"><img src="juvenil.jpg" alt="Juvenil"><span>Juvenil</span></a>
+    <a href="#varonil" id="varonil">
+        <img src="imagenes/varonil.jpg" alt="Varonil" loading="lazy">
+        <span>Varonil</span>
+    </a>
+
+    <a href="#femenil" id="femenil">
+        <img src="imagenes/femenil.jpg" alt="Femenil" loading="lazy">
+        <span>Femenil</span>
+    </a>
+
+    <a href="#juvenil" id="juvenil">
+        <img src="imagenes/juvenil.jpg" alt="Juvenil" loading="lazy">
+        <span>Juvenil</span>
+    </a>
 </section>
 
 <!-- SECCIÓN TE PUEDE INTERESAR -->
