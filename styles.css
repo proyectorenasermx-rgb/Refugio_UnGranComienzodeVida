@@ -1,171 +1,450 @@
-/* RESET */
-* {
-    box-sizing: border-box;
+/* =====================================================
+   🎨 SISTEMA DE BRANDING DINÁMICO
+===================================================== */
+
+:root {
+    --color-neon: #b026ff;
+    --color-neon-strong: #7a00cc;
+    --color-bg-soft: rgba(176, 38, 255, 0.08);
 }
 
-body {
-    margin: 0;
-    font-family: Arial, sans-serif;
+/* 🔵 VARONIL */
+body.varonil {
+    --color-neon: #00aaff;
+    --color-neon-strong: #0066cc;
+    --color-bg-soft: rgba(0,170,255,0.08);
 }
 
-/* HERO */
-.hero {
-    position: relative;
+/* 🟠 JUVENIL */
+body.juvenil {
+    --color-neon: #ff7a00;
+    --color-neon-strong: #cc5500;
+    --color-bg-soft: rgba(255,122,0,0.08);
 }
 
-.hero img {
-    width: 100%;
-    height: 100vh;
-    object-fit: cover;
+/* 🌸 FEMENIL */
+body.femenil {
+    --color-neon: #ff4da6;
+    --color-neon-strong: #cc007a;
+    --color-bg-soft: rgba(255,77,166,0.08);
 }
 
-/* MENÚ */
+/* =====================================================
+   💻 MENÚ NEÓN FIJO
+===================================================== */
+
 .menu {
-    position: absolute;
+    position: fixed;
     top: 20px;
-    left: 20px;
+    right: 20px;
+    width: fit-content;
+    padding: 15px 25px;
+    background: black;
+    border: 2px solid var(--color-neon);
+    border-radius: 12px;
+
+    box-shadow:
+        0 0 8px var(--color-neon),
+        0 0 16px var(--color-neon),
+        0 0 25px var(--color-neon-strong);
+
+    z-index: 9999;
+    transition: all 0.3s ease;
+    animation: neonPulse 2.5s infinite ease-in-out;
 }
 
-.menu ul {
+@keyframes neonPulse {
+    0% {
+        box-shadow:
+            0 0 8px var(--color-neon),
+            0 0 16px var(--color-neon);
+    }
+    50% {
+        box-shadow:
+            0 0 18px var(--color-neon),
+            0 0 35px var(--color-neon-strong);
+    }
+    100% {
+        box-shadow:
+            0 0 8px var(--color-neon),
+            0 0 16px var(--color-neon);
+    }
+}
+
+.menu-container {
+    display: flex;
+    align-items: center;
+}
+
+.menu-links {
     list-style: none;
+    display: flex;
+    gap: 25px;
     margin: 0;
     padding: 0;
-    display: flex;
-    gap: 20px;
-    align-items: center;
 }
 
 .menu a {
     color: white;
     text-decoration: none;
     font-weight: bold;
+    transition: 0.3s ease;
 }
 
-/* DROPDOWN */
-.dropdown {
+.menu a:hover {
+    color: var(--color-neon);
+    text-shadow: 0 0 8px var(--color-neon);
+}
+
+/* =====================================================
+   📱 BOTÓN MÓVIL
+===================================================== */
+
+.menu-toggle {
+    display: none;
+    font-size: 26px;
+    background: black;
+    color: white;
+    border: 2px solid var(--color-neon);
+    cursor: pointer;
+}
+
+@media (max-width: 768px) {
+
+    .menu {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        animation: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid var(--color-neon);
+        box-shadow:
+            0 0 10px var(--color-neon),
+            0 0 20px var(--color-neon);
+    }
+
+    .menu-links {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        flex-direction: column;
+        background: black;
+        border: 2px solid var(--color-neon);
+        border-radius: 12px;
+        padding: 15px;
+        display: none;
+        box-shadow:
+            0 0 10px var(--color-neon),
+            0 0 20px var(--color-neon);
+    }
+
+    .menu-links.active {
+        display: flex;
+    }
+}
+
+/* =====================================================
+   🌈 HERO CON AMBIENTE DE COLOR
+===================================================== */
+
+.hero {
     position: relative;
 }
 
-.dropdown-content {
-    display: none;
+.hero::after {
+    content: "";
     position: absolute;
-    background-color: rgba(0,0,0,0.85);
-    padding: 10px;
-    border-radius: 5px;
+    inset: 0;
+    background: linear-gradient(
+        135deg,
+        var(--color-bg-soft),
+        transparent 60%
+    );
+    pointer-events: none;
 }
 
-.dropdown-content li {
-    margin: 8px 0;
-}
+/* =====================================================
+   🌟 SECCIÓN INTERESAR PREMIUM
+===================================================== */
 
-.dropdown:hover .dropdown-content {
-    display: block;
-}
-
-/* VIDEOS */
-.videos {
-    display: flex;
-    justify-content: center;
-    gap: 30px;
-    padding: 40px;
-    flex-wrap: wrap;
-}
-
-.video-card {
-    max-width: 320px;
-}
-
-.video-card img {
-    width: 100%;
-    border-radius: 10px;
-}
-
-.video-card p {
-    text-align: center;
-    font-weight: bold;
-}
-
-/* CATEGORÍAS */
-.categorias {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    padding: 40px;
-    flex-wrap: wrap;
-}
-
-.categorias a {
-    text-align: center;
-    text-decoration: none;
-    color: black;
-}
-
-.categorias img {
-    width: 250px;
-    max-width: 100%;
-    border-radius: 10px;
-}
-
-.categorias span {
-    display: block;
-    margin-top: 10px;
-    font-weight: bold;
-}
-
-/* INTERESAR */
 .interesar {
-    background-color: #f4f4f4;
-    padding: 40px;
+    background: black;
+    margin: 80px auto;
+    padding: 50px;
+    width: 90%;
+    max-width: 1100px;
     text-align: center;
+
+    border: 2px solid var(--color-neon);
+    border-radius: 20px;
+
+    box-shadow:
+        0 0 15px var(--color-neon),
+        0 0 35px var(--color-neon-strong);
+
+    opacity: 0;
+    transform: translateY(40px);
+    transition: 0.8s ease;
+    overflow: hidden; 
+}
+
+.interesar.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.interesar h2 {
+    color: white;
+    margin-bottom: 30px;
+    text-shadow: 0 0 12px var(--color-neon);
 }
 
 .interesar .links {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 15px;
+    gap: 20px;
 }
 
 .interesar .links a {
     text-decoration: none;
     font-weight: bold;
-    color: #333;
-    background: white;
-    padding: 10px 20px;
-    border-radius: 20px;
+    color: white;
+    padding: 14px 30px;
+    border-radius: 30px;
+    border: 2px solid var(--color-neon);
+    transition: 0.3s ease;
+    max-width: 100%;
+    box-sizing: border-box;
 }
 
-/* TABLET */
-@media (max-width: 900px) {
-    .hero img {
-        height: 70vh;
-    }
-
-    .categorias img {
-        width: 200px;
-    }
+.interesar .links a:hover {
+    background: var(--color-neon);
+    color: black;
+    box-shadow:
+        0 0 15px var(--color-neon),
+        0 0 30px var(--color-neon),
+        0 0 40px var(--color-neon-strong);
+    transform: translateY(-4px);
 }
 
-/* CELULAR */
-@media (max-width: 600px) {
-    .menu ul {
-        flex-direction: column;
-        background-color: rgba(0,0,0,0.7);
-        padding: 10px;
-        border-radius: 10px;
-    }
-
-    .hero img {
-        height: 60vh;
-    }
-
-    .videos,
-    .categorias,
+@media (max-width: 768px) {
     .interesar {
-        padding: 20px;
+        padding: 30px 20px;
     }
 
-    .categorias img {
+    .interesar .links {
+        flex-direction: column;
+    }
+
+    .interesar .links a {
+        width: 100%;
+    }
+}
+
+/* =====================================================
+   🖱 SCROLLBAR PERSONALIZADA
+===================================================== */
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: black;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-neon);
+    border-radius: 10px;
+    box-shadow: 0 0 10px var(--color-neon);
+}
+
+* {
+    scrollbar-color: var(--color-neon) black;
+}
+
+/* =====================================================
+   ✨ TRANSICIONES SUAVES
+===================================================== */
+
+body {
+    transition: background 0.4s ease, color 0.4s ease;
+}
+/* =====================================================
+   🖼 ESTILOS PERSONALIZABLES PARA IMÁGENES
+===================================================== */
+
+/* Clase base para imágenes con estilo neón */
+.img-neon {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    border-radius: 15px;
+    border: 2px solid var(--color-neon);
+    transition: 0.4s ease;
+
+    box-shadow:
+        0 0 10px var(--color-neon),
+        0 0 25px var(--color-neon-strong);
+}
+
+/* Efecto hover elegante */
+.img-neon:hover {
+    transform: scale(1.05);
+    box-shadow:
+        0 0 20px var(--color-neon),
+        0 0 40px var(--color-neon-strong);
+}
+
+/* =====================================================
+   📏 CONTROL MANUAL DE TAMAÑOS
+===================================================== */
+
+/* Tamaños predefinidos */
+.img-sm { width: 200px; }
+.img-md { width: 350px; }
+.img-lg { width: 500px; }
+.img-xl { width: 700px; }
+
+/* Control libre (puedes modificar manualmente) */
+.img-custom {
+    width: 400px;      /* 👈 Cambia aquí el ancho manual */
+    height: auto;      /* Mantiene proporción */
+}
+
+/* Si quieres forzar tamaño exacto */
+.img-fixed {
+    width: 400px;      /* Cambiar manualmente */
+    height: 300px;     /* Cambiar manualmente */
+    object-fit: cover; /* Recorta sin deformar */
+}
+
+/* =====================================================
+   📱 RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .img-sm,
+    .img-md,
+    .img-lg,
+    .img-xl,
+    .img-custom,
+    .img-fixed {
+        width: 100%;
+        height: auto;
+    }
+}
+/* =====================================================
+   🎨 TARJETAS CON COLOR PROPIO POR SECCIÓN
+===================================================== */
+
+.card-seccion {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    gap: 12px;
+    transition: 0.3s ease;
+}
+
+.card-seccion img {
+    width: 180px;
+    max-width: 100%;
+    border-radius: 15px;
+    transition: 0.4s ease;
+    border: 2px solid transparent;
+}
+
+.card-seccion span {
+    font-weight: bold;
+    color: white;
+    transition: 0.3s ease;
+}
+
+/* =====================================================
+   🔵 VARONIL (AZUL)
+===================================================== */
+
+#varonil img {
+    border-color: #00aaff;
+    box-shadow:
+        0 0 10px #00aaff,
+        0 0 25px #0066cc;
+}
+
+#varonil:hover img {
+    transform: scale(1.05);
+    box-shadow:
+        0 0 20px #00aaff,
+        0 0 40px #0066cc;
+}
+
+#varonil:hover span {
+    color: #00aaff;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+/* =====================================================
+   🌸 FEMENIL (ROSA)
+===================================================== */
+
+#femenil img {
+    border-color: #ff4da6;
+    box-shadow:
+        0 0 10px #ff4da6,
+        0 0 25px #cc007a;
+}
+
+#femenil:hover img {
+    transform: scale(1.05);
+    box-shadow:
+        0 0 20px #ff4da6,
+        0 0 40px #cc007a;
+}
+
+#femenil:hover span {
+    color: #ff4da6;
+    text-shadow: 0 0 10px #ff4da6;
+}
+
+/* =====================================================
+   🟠 JUVENIL (NARANJA)
+===================================================== */
+
+#juvenil img {
+    border-color: #ff7a00;
+    box-shadow:
+        0 0 10px #ff7a00,
+        0 0 25px #cc5500;
+}
+
+#juvenil:hover img {
+    transform: scale(1.05);
+    box-shadow:
+        0 0 20px #ff7a00,
+        0 0 40px #cc5500;
+}
+
+#juvenil:hover span {
+    color: #ff7a00;
+    text-shadow: 0 0 10px #ff7a00;
+}
+
+/* =====================================================
+   📱 RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+    .card-seccion img {
         width: 100%;
     }
 }
