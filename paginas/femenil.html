@@ -21,7 +21,7 @@
     <link rel="stylesheet" href="../styles.css">
 </head>
 
-<body>
+<body class="femenil">
 
 <header class="hero">
     <picture>
@@ -35,14 +35,27 @@
 
         <!-- MENÚ -->
     <nav class="menu">
-        <ul>
+    <div class="menu-container">
+
+        <div class="logo">
+            <a href="../index.html">Inicio</a>
+        </div>
+
+        <button class="menu-toggle" id="menu-toggle">
+            ☰
+        </button>
+
+        <ul class="menu-links" id="menu-links">
             <li><a href="../index.html">Inicio</a></li>
             <li><a href="enconstruccion.html">Actividades</a></li>
             <li><a href="enconstruccion.html">Colaboraciones</a></li>
             <li><a href="enconstruccion.html">Testimonios</a></li>
             <li><a href="enconstruccion.html">Mapa</a></li>
         </ul>
-    </nav>
+
+    </div>
+</nav>
+
 </header>
 
 <!-- CONTENIDO PRINCIPAL -->
@@ -60,8 +73,3 @@
 <script src="../script.js"></script>
 </body>
 </html>
-
-
-
-
-
