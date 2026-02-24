@@ -448,3 +448,265 @@ body {
         width: 100%;
     }
 }
+/* =====================================================
+   💻 MÁS GRANDES EN PC
+===================================================== */
+@media (min-width: 1024px) {
+
+    .card-seccion img {
+        width: 320px;   /* puedes probar 280px, 300px, 350px */
+    }
+
+    .card-seccion span {
+        font-size: 1.2rem;
+    }
+
+}
+
+@media (min-width: 1024px) {
+
+    .categorias {
+        display: flex;
+        justify-content: center;   /* centra horizontal */
+        align-items: flex-start;
+        gap: 60px;                 /* espacio entre cuadros */
+        margin-top: 60px;
+    }
+
+}
+
+/* =====================================================
+   🎬 SECCIÓN VIDEOS ESTILO NEÓN
+===================================================== */
+
+.videos {
+    display: flex;
+    justify-content: center;
+    gap: 50px;
+    margin: 100px auto;
+    flex-wrap: wrap;
+}
+
+.video-card {
+    background: black;
+    border-radius: 20px;
+    overflow: hidden;
+    text-align: center;
+    transition: 0.4s ease;
+    width: 320px;
+}
+
+.video-card img {
+    width: 100%;
+    display: block;
+    transition: 0.4s ease;
+}
+
+.video-card p {
+    margin: 15px 0;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+
+/* =====================================
+   🎀 ROSA
+===================================== */
+
+.video-card.rosa {
+    border: 2px solid #ff4da6;
+    box-shadow:
+        0 0 15px #ff4da6,
+        0 0 35px #cc007a;
+}
+
+.video-card.rosa p {
+    color: #ff4da6;
+    text-shadow: 0 0 10px #ff4da6;
+}
+
+.video-card.rosa:hover {
+    transform: translateY(-10px);
+    box-shadow:
+        0 0 25px #ff4da6,
+        0 0 50px #cc007a;
+}
+
+/* =====================================
+   🔵 AZUL
+===================================== */
+
+.video-card.azul {
+    border: 2px solid #00aaff;
+    box-shadow:
+        0 0 15px #00aaff,
+        0 0 35px #0066cc;
+}
+
+.video-card.azul p {
+    color: #00aaff;
+    text-shadow: 0 0 10px #00aaff;
+}
+
+.video-card.azul:hover {
+    transform: translateY(-10px);
+    box-shadow:
+        0 0 25px #00aaff,
+        0 0 50px #0066cc;
+}
+
+/* =====================================
+   📱 RESPONSIVE
+===================================== */
+
+@media (max-width: 768px) {
+    .videos {
+        flex-direction: column;
+        align-items: center;
+        gap: 40px;
+    }
+
+    .video-card {
+        width: 90%;
+    }
+}
+
+/* =====================================================
+   💻 VIDEOS MÁS GRANDES EN PC
+===================================================== */
+@media (min-width: 1024px) {
+
+    .video-card {
+        width: 600px;   /* prueba 420px, 480px o 500px */
+    }
+
+}
+
+/* =====================================================
+   💜 HERO CON NEÓN PRINCIPAL
+===================================================== */
+
+.hero img {
+    width: 100%;
+    display: block;
+    border: 3px solid var(--color-neon);
+    box-shadow:
+        0 0 20px var(--color-neon),
+        0 0 50px var(--color-neon-strong);
+}
+
+/* =====================================================
+   📱 HERO FULL WIDTH EN MÓVIL
+===================================================== */
+
+@media (max-width: 768px) {
+
+    .hero {
+        padding: 0;
+        margin: 0;
+    }
+
+    .hero img {
+        width: 100vw;       /* ocupa todo el ancho real */
+        max-width: 100%;
+        height: auto;
+    }
+
+    body {
+        overflow-x: hidden; /* evita scroll lateral */
+    }
+
+}
+
+/* =====================================================
+   🛡 FONDO VIKINGO NEÓN CAFÉ
+===================================================== */
+
+/* Variables especiales para esta sección */
+:root {
+    --neon-cafe: #c47b2a;
+    --neon-cafe-strong: #8b4513;
+}
+
+/* Fondo principal */
+body.fondo-vikingo {
+    background-color: #1a120b; /* base oscuro café */
+    background-image: url("Imagenes/fondo-vikingo.png");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+    position: relative;
+    color: white;
+}
+
+/* Capa overlay para efecto neón dinámico */
+body.fondo-vikingo::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: radial-gradient(
+        circle at center,
+        rgba(196, 123, 42, 0.15),
+        rgba(0, 0, 0, 0.85)
+    );
+    pointer-events: none;
+    z-index: -1;
+}
+
+/* Glow dinámico animado */
+body.fondo-vikingo::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background: linear-gradient(
+        45deg,
+        transparent 30%,
+        rgba(196, 123, 42, 0.08),
+        transparent 70%
+    );
+    animation: glowMove 8s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+}
+
+@keyframes glowMove {
+    0% {
+        background-position: 0% 0%;
+    }
+    100% {
+        background-position: 200% 200%;
+    }
+}
+
+/* =====================================================
+   🔥 TARJETAS ADAPTADAS AL FONDO
+===================================================== */
+
+.card-seccion {
+    backdrop-filter: blur(6px);
+    background: rgba(0, 0, 0, 0.4);
+    border-radius: 20px;
+}
+
+/* =====================================================
+   📱 RESPONSIVE
+===================================================== */
+
+@media (max-width: 768px) {
+
+    body.fondo-vikingo {
+        background-attachment: scroll; /* evita bug en móviles */
+        background-size: cover;
+    }
+
+}
+
+@media (max-width: 768px) {
+
+    body.fondo-vikingo {
+        background-size: 120%;
+        background-repeat: repeat;
+        background-position: center;
+    }
+
+}
