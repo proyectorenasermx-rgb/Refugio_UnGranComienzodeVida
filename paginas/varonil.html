@@ -635,10 +635,10 @@
 
 @media (max-width: 768px) {
 
- .carrusel {
+    .carrusel {
         padding-bottom: 60px;
     }
-   /* HERO */
+    /* HERO */
     .hero-espiritual{
         padding: 110px 15px 60px;
     }
@@ -670,13 +670,13 @@
         font-size: 22px;
     }
 
+    /* CARRUSEL */
     .carrusel-track{
     position: relative;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 420px; /* aumenta un poco */
-    padding-bottom: 40px; /* 👈 espacio extra inferior */
+    overflow: visible;
 }
 
     .card{
@@ -703,6 +703,39 @@
     .next{ right: 0; }
 
 }
+/* ===== SCROLL AZUL NEÓN ===== */
+
+html, body {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #003cff #000;
+}
+
+/* Chrome, Edge, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: #000;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: #00f0ff !important;
+    border-radius: 10px;
+    box-shadow:
+        0 0 10px #00f0ff,
+        0 0 25px #00f0ff,
+        0 0 50px #00bfff;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+    background: #00c8ff;
+}
+
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 </head>
@@ -1071,6 +1104,3 @@ function crearRamificaciones(){
 
 </body>
 </html>
-
-
-
