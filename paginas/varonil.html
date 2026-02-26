@@ -628,6 +628,74 @@
     50%{transform:translate(-50%,-50%) scale(1.2);}
     100%{transform:translate(-50%,-50%) scale(1);}
 }
+
+/* =====================================================
+   📱 RESPONSIVE MOVIL PREMIUM
+===================================================== */
+
+@media (max-width: 768px) {
+
+    /* HERO */
+    .hero-espiritual{
+        padding: 110px 15px 60px;
+    }
+
+    /* TÍTULO */
+    .titulo-vikingo span{
+        font-size: clamp(38px, 10vw, 60px);
+        letter-spacing: 4px;
+    }
+
+    .linea-sagrada{
+        width: 85%;
+        margin-top: 25px;
+    }
+
+    .simbolo-fondo{
+        font-size: 160px;
+        opacity: 0.04;
+    }
+
+    /* SECCIONES */
+    .seccion-carrusel{
+        width: 92%;
+        padding: 25px 15px;
+        margin: 40px auto;
+    }
+
+    .seccion-carrusel h1{
+        font-size: 22px;
+    }
+
+    /* CARRUSEL */
+    .carrusel-track{
+        height: 260px;
+    }
+
+    .card{
+        width: 85%;
+        max-width: 280px;
+        padding: 18px;
+    }
+
+    .card h3{
+        font-size: 18px;
+    }
+
+    .card p{
+        font-size: 13px;
+    }
+
+    /* BOTONES LATERALES MÁS PEQUEÑOS */
+    .btn{
+        font-size: 18px;
+        padding: 6px 10px;
+    }
+
+    .prev{ left: 0; }
+    .next{ right: 0; }
+
+}
 </style>
 <link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 </head>
@@ -636,8 +704,10 @@
     <div class="columna-energia"></div>
 
 <header class="hero-espiritual">
-<header class="hero">
+
+    <header class="hero">
    
+
         <!-- MENÚ -->
     <nav class="menu">
     <div class="menu-container">
@@ -651,7 +721,7 @@
             <li><a href="enconstruccion.html">Actividades</a></li>
             <li><a href="enconstruccion.html">Testimonios</a></li>
             <li><a href="ubicacion.html">Mapa</a></li>
-            <li><a href="femenil.html">Femenil</a></li>
+            <li><a href="varonil.html">Varonil</a></li>
             <li><a href="juvenil.html">Juvenil</a></li>
         </ul>
 
@@ -659,6 +729,7 @@
 </nav>
 
 </header>
+
     <div class="simbolo-fondo">ᛉ</div>
     <div class="energia-descendente"></div>
 
@@ -816,16 +887,18 @@ function update() {
 
         const offset = i - index;
 
-        card.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+const cardWidth = window.innerWidth <= 768 ? 260 : 320;
 
-        card.style.transform = `
-            translateX(${offset * 320}px)
-            rotateY(${offset * -40}deg)
-            scale(${offset === 0 ? 1 : 0.8})
-        `;
+card.style.transition = "transform 0.8s ease, opacity 0.8s ease";
 
-        card.style.opacity = Math.abs(offset) > 2 ? "0" : "1";
-        card.style.zIndex = cards.length - Math.abs(offset);
+card.style.transform = `
+    translateX(${offset * cardWidth}px)
+    rotateY(${offset * -40}deg)
+    scale(${offset === 0 ? 1 : 0.8})
+`;
+
+card.style.opacity = Math.abs(offset) > 2 ? "0" : "1";
+card.style.zIndex = cards.length - Math.abs(offset);
     });
 
     indicadores.querySelectorAll("span")
@@ -991,4 +1064,3 @@ function crearRamificaciones(){
 
 </body>
 </html>
-
