@@ -1,71 +1,971 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refugio Un Gran Comienzo de Vida Varonil</title>
 
-    <title>Refugio Un Gran Comienzo de Vida Varonil</title>
+<link rel="icon" type="image/png" href="../Imagenes/varonil-map.png">
+<link rel="stylesheet" href="../styles.css">
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="../Imagenes/varonil-map.png">
+<style>
 
-    <!-- METADATOS PARA WHATSAPP / REDES SOCIALES -->
-    <meta property="og:title" content="Refugio Un Gran Comienzo de Vida Varonil">
-    <meta property="og:description" content="Centro de prevención, atento tratamiento para las adicciones para varones">
-    <meta property="og:image" content="../Imagenes/Presentacion.png">
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="es_MX">
-    <meta property="og:url" content="https://refugiocomenzandounanuevavida.com">
-    <link rel="stylesheet" href="../styles.css">
+/* =====================================================
+   🎠 SECCIÓN CARRUSEL ULTRA PREMIUM
+===================================================== */
+.seccion {
+    position: relative;
+    z-index: 5;
+}
+
+.seccion-carrusel {
+    margin: 60px auto;
+    width: 70%;
+    max-width: 1200px;
+    text-align: center;
+
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.8),
+        0 0 60px var(--color-neon-strong);
+
+    opacity: 1;
+    transform: none;
+    z-index: 5;
+}
+.seccion-carrusel{
+    position: relative;
+    z-index: 5;
+}
+
+.seccion-carrusel.visible {
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 5;
+}
+
+.seccion-carrusel h1 {
+    color: white;
+    text-shadow: 0 0 25px var(--color-neon);
+    margin-bottom: 15px;
+    z-index: 5;
+}
+
+.carrusel {
+    position: relative;
+    perspective: 1200px;
+    overflow: hidden;
+    padding: 4px 0;
+}
+
+.carrusel-track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s ease;
+    position: relative;
+    height: 230px; /* 👈 AGREGA ESTO */
+}
+
+.card {
+    position: absolute;
+    width: 300px;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--color-neon);
+    box-shadow:
+        0 0 15px var(--color-neon),
+        0 0 40px var(--color-neon-strong);
+    transition: 0.8s ease;
+    text-align: center;
+    z-index: 5;
+
+    top: 0; /* 👈 AGREGA ESTO */
+}
+
+.card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 2px solid var(--color-neon);
+}
+
+.card h3 {
+    color: var(--color-neon);
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.leer-mas {
+    margin-top: 12px;
+    padding: 8px 18px;
+    border-radius: 25px;
+    border: 2px solid var(--color-neon);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.leer-mas:hover {
+    background: var(--color-neon);
+    color: black;
+    box-shadow: 0 0 20px var(--color-neon);
+}
+
+.btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: black;
+    border: 2px solid var(--color-neon);
+    color: var(--color-neon);
+    font-size: 22px;
+    padding: 10px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.btn:hover {
+    background: var(--color-neon);
+    color: black;
+}
+
+.indicadores {
+    margin-top: 1px;
+    z-index:5;
+}
+
+.indicadores span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background: #444;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index:5;
+}
+
+.indicadores span.activo {
+    background: var(--color-neon);
+    box-shadow: 0 0 10px var(--color-neon);
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.9);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: black;
+    border: 2px solid var(--color-neon);
+    border-radius: 20px;
+    padding: 40px;
+    max-width: 700px;
+    width: 90%;
+    box-shadow:
+        0 0 25px var(--color-neon),
+        0 0 60px var(--color-neon-strong);
+}
+
+.modal-content h2 {
+    margin-bottom: 20px;
+}
+
+.cerrar {
+    position: absolute;
+    right: 25px;
+    top: 20px;
+    font-size: 28px;
+    color: var(--color-neon);
+}
+
+.titulo-vikingo {
+    position: absolute;
+    top: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    
+    font-size: 70px;
+    letter-spacing: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    color: var(--color-neon);
+
+    text-shadow:
+        0 0 5px var(--color-neon),
+        0 0 15px var(--color-neon),
+        0 0 30px var(--color-neon-strong),
+        0 0 60px var(--color-neon-strong);
+
+    animation: brilloNeon 2.5s infinite alternate;
+    z-index: 10;
+}
+
+
+
+/* Animación neón */
+@keyframes brilloNeon {
+    from {
+        text-shadow:
+            0 0 5px var(--color-neon),
+            0 0 15px var(--color-neon);
+    }
+    to {
+        text-shadow:
+            0 0 10px var(--color-neon),
+            0 0 25px var(--color-neon),
+            0 0 50px var(--color-neon-strong),
+            0 0 80px var(--color-neon-strong);
+    }
+}
+
+.hero-simple {
+    position: relative;
+    width: 100%;
+    padding: 80px 0 40px 0;
+    text-align: center;
+}
+
+
+/* TITULO METAL NEON */
+
+.titulo-vikingo span {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 85px;
+    letter-spacing: 10px;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(180deg, #ffffff, #999, #444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 0 10px var(--color-neon),
+        0 0 25px var(--color-neon),
+        0 0 50px var(--color-neon-strong),
+        0 0 100px var(--color-neon-strong);
+
+    animation: neonPulse 3s infinite alternate;
+}
+
+/* RUNAS */
+
+.runas {
+    font-size: 30px;
+    color: var(--color-neon);
+    text-shadow: 0 0 15px var(--color-neon);
+    position: absolute;
+    top: 35px;
+}
+
+.runas.izquierda { left: 20%; }
+.runas.derecha { right: 20%; }
+
+/* HUMO */
+
+.humo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 600px;
+    height: 200px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+    filter: blur(40px);
+    animation: humoMove 6s infinite alternate ease-in-out;
+}
+
+/* PARTICULAS */
+
+.particulas::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    top: 0;
+    left: 0;
+    background-image: radial-gradient(var(--color-neon) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.2;
+    animation: moverParticulas 20s linear infinite;
+}
+
+/* CHISPAS */
+
+.chispas::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    top: 20px;
+    left: 0;
+    background-image: radial-gradient(white 2px, transparent 2px);
+    background-size: 120px 120px;
+    opacity: 0.6;
+    animation: chispasMove 5s linear infinite;
+}
+
+/* ANIMACIONES */
+
+@keyframes neonPulse {
+    from {
+        text-shadow:
+            0 0 10px var(--color-neon),
+            0 0 30px var(--color-neon);
+    }
+    to {
+        text-shadow:
+            0 0 20px var(--color-neon),
+            0 0 60px var(--color-neon),
+            0 0 120px var(--color-neon-strong);
+    }
+}
+
+@keyframes humoMove {
+    from { transform: translateX(-50%) translateY(0); }
+    to { transform: translateX(-50%) translateY(20px); }
+}
+
+@keyframes moverParticulas {
+    from { background-position: 0 0; }
+    to { background-position: 500px 500px; }
+}
+
+@keyframes chispasMove {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
+}
+/* ================= HERO ESPIRITUAL LIMPIO ================= */
+
+.hero-espiritual{
+    position:relative;
+    padding:140px 20px 100px;
+    text-align:center;
+    overflow:visible;
+}
+
+/* Fondo degradado oscuro */
+.hero-espiritual::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at center,
+        rgba(0,0,0,0.85) 0%,
+        rgba(0,0,0,0.7) 40%,
+        rgba(0,0,0,0.3) 70%,
+        transparent 100%);
+    z-index:0;
+}
+
+/* Símbolo vikingo gigante */
+.simbolo-fondo{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:280px;
+    color:rgba(255,255,255,0.03);
+    text-shadow:0 0 60px var(--color-neon);
+    z-index:1;
+    pointer-events:none;
+    animation:rotarSimbolo 40s linear infinite;
+}
+
+@keyframes rotarSimbolo{
+    from{transform:translate(-50%,-50%) rotate(0deg);}
+    to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+/* Contenedor del título */
+.titulo-epico{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px 40px;
+    text-align: center;
+}
+
+/* Título vikingo */
+.titulo-vikingo span{
+    font-family:'Uncial Antiqua',cursive;
+    font-size:90px;
+    letter-spacing:12px;
+    display:inline-block;
+    background:linear-gradient(180deg,#fff,#aaa,#555);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
+    text-shadow:
+        0 0 10px var(--color-neon),
+        0 0 30px var(--color-neon),
+        0 0 70px var(--color-neon-strong);
+    opacity:0;
+    animation:forja 2.5s ease forwards,
+              brilloMistico 3s infinite alternate 2.5s;
+}
+
+/* Animación forja */
+@keyframes forja{
+    0%{
+        opacity:0;
+        filter:brightness(5);
+        letter-spacing:30px;
+    }
+    40%{
+        opacity:1;
+        filter:brightness(2);
+    }
+    100%{
+        opacity:1;
+        filter:brightness(1);
+        letter-spacing:12px;
+    }
+}
+
+/* Brillo místico continuo */
+@keyframes brilloMistico{
+    from{
+        text-shadow:
+            0 0 15px var(--color-neon),
+            0 0 40px var(--color-neon);
+    }
+    to{
+        text-shadow:
+            0 0 25px var(--color-neon),
+            0 0 80px var(--color-neon),
+            0 0 120px var(--color-neon-strong);
+    }
+}
+
+/* Línea sagrada conectada */
+.linea-sagrada{
+    margin:40px auto 0;
+    width:60%;
+    height:4px;
+    background:linear-gradient(to right,
+        transparent,
+        var(--color-neon),
+        white,
+        var(--color-neon),
+        transparent);
+    box-shadow:
+        0 0 20px var(--color-neon),
+        0 0 50px var(--color-neon-strong);
+        z-index:1;
+}
+
+/* Energía descendente (controlada por scroll) */
+.energia-descendente{
+    position:absolute;
+    top:100%;
+    left:50%;
+    width:4px;
+    height:0;
+    transform:translateX(-50%);
+    background:linear-gradient(
+        to bottom,
+        white,
+        var(--color-neon),
+        rgba(0,255,200,0.4),
+        transparent);
+    box-shadow:
+        0 0 15px var(--color-neon),
+        0 0 40px var(--color-neon-strong);
+    z-index:1;
+    transition:height 0.15s linear;
+}
+/* ================= ANIMACIONES ================= */
+
+/* Efecto FORJA (aparece desde fuego blanco) */
+
+@keyframes forja {
+    0% {
+        opacity: 0;
+        filter: brightness(5);
+        letter-spacing: 30px;
+    }
+    40% {
+        opacity: 1;
+        filter: brightness(2);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+        letter-spacing: 12px;
+    }
+}
+
+/* Brillo espiritual constante */
+
+@keyframes brilloMistico {
+    from {
+        text-shadow:
+            0 0 15px var(--color-neon),
+            0 0 40px var(--color-neon);
+    }
+    to {
+        text-shadow:
+            0 0 25px var(--color-neon),
+            0 0 80px var(--color-neon),
+            0 0 120px var(--color-neon-strong);
+    }
+}
+
+.hero-espiritual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--color-neon) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.08;
+    animation: moverEnergia 60s linear infinite;
+    z-index: 0;
+}
+
+@keyframes moverEnergia {
+    from { background-position: 0 0; }
+    to   { background-position: 800px 800px; }
+}
+
+/* DESTELLO EN PRIMERA SECCIÓN */
+.impacto-energia {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle,
+        rgba(0,255,200,0.8),
+        rgba(0,255,200,0.4),
+        transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.impacto-activo {
+    animation: destelloImpacto 0.6s ease-out forwards;
+}
+
+@keyframes destelloImpacto {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(2);
+    }
+}
+
+/* COLUMNA ESPIRITUAL GLOBAL */
+.columna-energia{
+    position:fixed;
+    top:0;
+    left:50%;
+    width:4px;
+    height:0;
+    transform:translateX(-50%);
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        white,
+        var(--color-neon),
+        var(--color-neon),
+        transparent
+    );
+    box-shadow:
+        0 0 20px var(--color-neon),
+        0 0 60px var(--color-neon-strong);
+    pointer-events:none;
+    z-index:1;
+    transition:height 0.1s linear;
+}
+
+.vibrar{
+    animation:vibracion 0.4s ease;
+}
+
+@keyframes vibracion{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-3px);}
+    50%{transform:translateX(3px);}
+    75%{transform:translateX(-2px);}
+    100%{transform:translateX(0);}
+}
+
+.simbolo-reaccion{
+    animation:impactoSimbolo 0.6s ease;
+}
+
+@keyframes impactoSimbolo{
+    0%{transform:translate(-50%,-50%) scale(1);}
+    50%{transform:translate(-50%,-50%) scale(1.2);}
+    100%{transform:translate(-50%,-50%) scale(1);}
+}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 </head>
 
-<body class="varonil">
+<body class="varonil fondo-vikingo">
+    <div class="columna-energia"></div>
 
+<header class="hero-espiritual">
 
-<!-- HEADER CON IMAGEN PRINCIPAL -->
-<header class="hero">
-    <picture>
+    <div class="simbolo-fondo">ᛉ</div>
+    <div class="energia-descendente"></div>
 
-        <source srcset="../Imagenes/varonil.png" media="(max-width: 700px)">
-    <img src="../Imagenes/principal.png" alt="Imagen principal">
-    </picture>
+    <div class="titulo-epico">
+        
+        <h1 class="titulo-vikingo">
+            <span>VARONIL</span>
+        </h1>
 
-    <!-- MENÚ -->
-    <nav class="menu">
-    <div class="menu-container">
-     
-        <button class="menu-toggle" id="menu-toggle">
-            ☰
-        </button>
-
-        <ul class="menu-links" id="menu-links">
-             <li><a href="../index.html">Inicio</a></li>
-            <li><a href="enconstruccion.html">Actividades</a></li>
-            <li><a href="enconstruccion.html">Testimonios</a></li>
-            <li><a href="ubicacion.html">Mapa</a></li>
-            <li><a href="femenil.html">Femenil</a></li>
-            <li><a href="juvenil.html">Juvenil</a></li>
-        </ul>
-
+        <div class="linea-sagrada"></div>
+        
     </div>
-</nav>
 
 </header>
 
-<!-- CONTENIDO PRINCIPAL -->
 <main class="contenido">
-    <section>
-        <h1>Actividades</h1>
-        <p>
-            Actividades, eventos y dinámicas realizadas varonil
-        </p>
-    </section>
+
+<section class="seccion-carrusel visible">
+<h1>Testimonios</h1>
+<div class="impacto-energia"></div>
+<div class="carrusel">
+<button class="btn prev">&#10094;</button>
+
+<div class="carrusel-track">
+
+<div class="card">
+<img src="../Imagenes/testimonio1.jpg">
+<h3>Historia de Vida</h3>
+<p>Proceso de transformación personal.</p>
+<button class="leer-mas"
+data-titulo="Historia de Vida"
+data-contenido="Aquí puedes colocar el artículo completo del testimonio. Puedes escribir texto largo sin afectar el diseño.">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio2.jpg">
+<h3>Nuevo Comienzo</h3>
+<p>Recuperando esperanza y propósito.</p>
+<button class="leer-mas"
+data-titulo="Nuevo Comienzo"
+data-contenido="Artículo completo del segundo testimonio.">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio3.jpg">
+<h3>Renacer</h3>
+<p>Un camino hacia la recuperación.</p>
+<button class="leer-mas"
+data-titulo="Renacer"
+data-contenido="Contenido ampliado del testimonio.">
+Leer más
+</button>
+</div>
+
+</div>
+
+<button class="btn next">&#10095;</button>
+</div>
+
+<div class="indicadores"></div>
+
+</section>
+
+<!--Actividades-->
+
+<section class="seccion-carrusel visible">
+<h1>Actividades</h1>
+
+<div class="carrusel">
+<button class="btn prev">&#10094;</button>
+
+<div class="carrusel-track">
+
+<div class="card">
+<img src="../Imagenes/testimonio1.jpg">
+<h3>Historia de Vida</h3>
+<p>Proceso de transformación personal.</p>
+<button class="leer-mas"
+data-titulo="Historia de Vida"
+data-contenido="Aquí puedes colocar el artículo completo del testimonio. Puedes escribir texto largo sin afectar el diseño.">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio2.jpg">
+<h3>Nuevo Comienzo</h3>
+<p>Recuperando esperanza y propósito.</p>
+<button class="leer-mas"
+data-titulo="Nuevo Comienzo"
+data-contenido="Artículo completo del segundo testimonio.">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio3.jpg">
+<h3>Renacer</h3>
+<p>Un camino hacia la recuperación.</p>
+<button class="leer-mas"
+data-titulo="Renacer"
+data-contenido="Contenido ampliado del testimonio.">
+Leer más
+</button>
+</div>
+
+</div>
+
+<button class="btn next">&#10095;</button>
+</div>
+
+<div class="indicadores"></div>
+
+</section>
 </main>
 
-<!-- JS -->
-<script src="../script.js"></script>
+<!-- MODAL -->
+<div class="modal" id="modal">
+<div class="modal-content">
+<span class="cerrar">&times;</span>
+<h2 id="modal-titulo"></h2>
+<p id="modal-texto"></p>
+</div>
+</div>
+
+<script>
+
+/* ================= COVERFLOW ================= */
+
+document.querySelectorAll(".carrusel").forEach(carrusel => {
+
+const cards = carrusel.querySelectorAll(".card");
+const next = carrusel.querySelector(".next");
+const prev = carrusel.querySelector(".prev");
+const indicadores = carrusel.parentElement.querySelector(".indicadores");
+
+let index = 0;
+let autoplay;
+
+/* Crear indicadores */
+cards.forEach((_, i) => {
+    const dot = document.createElement("span");
+    if(i === 0) dot.classList.add("activo");
+    dot.onclick = () => { index = i; update(); };
+    indicadores.appendChild(dot);
+});
+
+function update() {
+
+    cards.forEach((card, i) => {
+
+        const offset = i - index;
+
+        card.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+
+        card.style.transform = `
+            translateX(${offset * 320}px)
+            rotateY(${offset * -40}deg)
+            scale(${offset === 0 ? 1 : 0.8})
+        `;
+
+        card.style.opacity = Math.abs(offset) > 2 ? "0" : "1";
+        card.style.zIndex = cards.length - Math.abs(offset);
+    });
+
+    indicadores.querySelectorAll("span")
+    .forEach((dot, i) => {
+        dot.classList.toggle("activo", i === index);
+    });
+}
+
+function nextSlide() {
+    index = (index + 1) % cards.length;
+    update();
+}
+
+function prevSlide() {
+    index = (index - 1 + cards.length) % cards.length;
+    update();
+}
+
+next.onclick = nextSlide;
+prev.onclick = prevSlide;
+
+function startAutoplay() {
+    autoplay = setInterval(nextSlide, 4000);
+}
+
+function stopAutoplay() {
+    clearInterval(autoplay);
+}
+
+carrusel.addEventListener("mouseenter", stopAutoplay);
+carrusel.addEventListener("mouseleave", startAutoplay);
+
+startAutoplay();
+update();
+
+});
+
+
+/* ================= MODAL ================= */
+
+const modal = document.getElementById("modal");
+const titulo = document.getElementById("modal-titulo");
+const texto = document.getElementById("modal-texto");
+
+document.querySelectorAll(".leer-mas").forEach(btn => {
+    btn.onclick = () => {
+        titulo.textContent = btn.dataset.titulo;
+        texto.textContent = btn.dataset.contenido;
+        modal.style.display = "flex";
+    };
+});
+
+document.querySelector(".cerrar").onclick = () => modal.style.display = "none";
+window.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
+
+
+/* ================= ENERGÍA GLOBAL ESPIRITUAL ================= */
+
+const columna = document.querySelector(".columna-energia");
+const energiaHero = document.querySelector(".energia-descendente");
+const primeraSeccion = document.querySelector(".seccion");
+const impacto = document.querySelector(".impacto-energia");
+const simbolo = document.querySelector(".simbolo-fondo");
+
+/* Portal final */
+let portal;
+function crearPortal() {
+    portal = document.createElement("div");
+    portal.className = "portal-final";
+    document.body.appendChild(portal);
+}
+
+crearPortal();
+
+let impactoActivado = false;
+
+window.addEventListener("scroll", () => {
+
+    const scrollY = window.scrollY;
+    const alturaTotal = document.body.scrollHeight;
+    const ventana = window.innerHeight;
+
+    /* 1️⃣ Columna infinita */
+    if(columna){
+        columna.style.height = scrollY + ventana + "px";
+    }
+
+    /* 2️⃣ Energía inicial del hero */
+    if(energiaHero){
+        const hero = document.querySelector(".hero-espiritual");
+        if(hero){
+            const heroHeight = hero.offsetHeight;
+            if(scrollY < heroHeight){
+                energiaHero.style.height = scrollY + "px";
+            }
+        }
+    }
+
+    /* 3️⃣ Impacto primera sección */
+    if(primeraSeccion && impacto){
+        const seccionTop = primeraSeccion.getBoundingClientRect().top;
+
+        if(seccionTop <= 120 && !impactoActivado){
+
+            impacto.classList.add("impacto-activo");
+            primeraSeccion.classList.add("vibrar");
+
+            if(simbolo){
+                simbolo.classList.add("simbolo-reaccion");
+                setTimeout(()=>{
+                    simbolo.classList.remove("simbolo-reaccion");
+                },600);
+            }
+
+            /* Ramificaciones */
+            crearRamificaciones();
+
+            setTimeout(()=>{
+                primeraSeccion.classList.remove("vibrar");
+            },600);
+
+            impactoActivado = true;
+        }
+    }
+
+    /* 4️⃣ Portal final al llegar abajo */
+    if(scrollY + ventana >= alturaTotal - 50){
+        if(portal){
+            portal.classList.add("portal-activo");
+        }
+    }
+
+});
+
+
+/* ================= RAMIFICACIONES ================= */
+
+function crearRamificaciones(){
+
+    for(let i=0; i<6; i++){
+
+        const rama = document.createElement("div");
+        rama.className = "rama-energia";
+
+        rama.style.left = "50%";
+        rama.style.top = window.scrollY + window.innerHeight/2 + "px";
+
+        rama.style.transform = `
+            translateX(-50%)
+            rotate(${Math.random()*120 - 60}deg)
+        `;
+
+        document.body.appendChild(rama);
+
+        setTimeout(()=>{
+            rama.remove();
+        },800);
+    }
+
+}
+
+</script>
+
 </body>
 </html>
-
-
-
