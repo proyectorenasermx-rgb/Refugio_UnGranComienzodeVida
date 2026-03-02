@@ -363,7 +363,7 @@
 
 .hero-espiritual{
     position:relative;
-    padding:140px 20px 100px;
+    padding:90px 20px 80px; /* antes 140px */
     text-align:center;
     overflow:visible;
 }
@@ -481,7 +481,7 @@
 /* Energía descendente (controlada por scroll) */
 .energia-descendente{
     position:absolute;
-    top:100%;
+    top: calc(100% + 120px);
     left:50%;
     width:4px;
     height:0;
@@ -632,8 +632,34 @@
 /* =====================================================
    📱 RESPONSIVE MOVIL PREMIUM
 ===================================================== */
-
 @media (max-width: 768px) {
+    @media (max-width: 768px) {
+
+    .carrusel-track{
+        position: relative;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: auto;
+    }
+
+    .card{
+        position: relative; /* 👈 clave */
+        transform: none !important;
+        width: 85%;
+        min-width: 260px;
+        max-width: 300px;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+    }
+
+    .btn{
+        display:none; /* ocultamos flechas en móvil */
+    }
+
+}
 
     .carrusel {
         padding-bottom: 60px;
