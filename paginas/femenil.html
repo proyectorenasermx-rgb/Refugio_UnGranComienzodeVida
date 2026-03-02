@@ -1,40 +1,856 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Refugio Un Gran Comienzo de Vida Femenil</title>
 
-    <title>Refugio Un Gran Comienzo de Vida femenil</title>
+<link rel="icon" type="image/png" href="../Imagenes/femenil-map.png">
+<link rel="stylesheet" href="../styles.css">
 
-    <!-- FAVICON -->
-    <link rel="icon" type="image/png" href="../Imagenes/femenil-map.png">
+<style>
 
-    <!-- METADATOS PARA WHATSAPP / REDES SOCIALES -->
-    <meta property="og:title" content="Refugio Un Gran Comienzo de Vida Femenil">
-    <meta property="og:description" content="Centro de prevención, atento tratamiento para las adicciones para mujeres">
 
-    <meta property="og:image" content="https://refugiocomenzandounanuevavida.com/Imagenes/Presentacion.png">
+/* =====================================================
+   🎠 SECCIÓN CARRUSEL ULTRA PREMIUM
+===================================================== */
+.seccion {
+    position: relative;
+    z-index: 5;
+}
+
+.seccion-carrusel {
+    margin: 60px auto;
+    width: 70%;
+    max-width: 1200px;
+    text-align: center;
+    position: relative;
+    background: rgba(0, 0, 0, 0.35);
+    backdrop-filter: blur(12px);
+    padding: 40px;
+    border-radius: 25px;
+    border: 1px solid rgba(255,255,255,0.1);
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.8),
+        0 0 60px var(--color-neon-strong);
+    opacity: 1;
+    transform: none;
+    z-index: 5;
+}
+
+
+.seccion-carrusel.visible {
+    opacity: 1;
+    transform: translateY(0);
+    z-index: 5;
+}
+
+.seccion-carrusel h1 {
+    color: white;
+    text-shadow: 0 0 25px var(--color-neon);
+    margin-bottom: 15px;
+    z-index: 5;
+}
+
+.carrusel {
+    position: relative;
+    perspective: 1200px;
+    overflow: hidden;
+    padding: 4px 0;
+}
+
+.carrusel-track {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 0.8s ease;
+    position: relative;
+    height: 230px; /* 👈 AGREGA ESTO */
+}
+
+.card {
+    position: absolute;
+    width: 300px;
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(0,0,0,0.65);
+    backdrop-filter: blur(8px);
+    border: 2px solid var(--color-neon);
+    box-shadow:
+        0 0 15px var(--color-neon),
+        0 0 40px var(--color-neon-strong);
+    transition: 0.8s ease;
+    text-align: center;
+    z-index: 5;
+
+    top: 0; /* 👈 AGREGA ESTO */
+}
+
+.card img {
+    width: 100%;
+    border-radius: 15px;
+    margin-bottom: 15px;
+    border: 2px solid var(--color-neon);
+}
+
+.card h3 {
+    color: var(--color-neon);
+    margin-bottom: 10px;
+}
+
+.card p {
+    color: #ccc;
+    font-size: 14px;
+}
+
+.leer-mas {
+    margin-top: 12px;
+    padding: 8px 18px;
+    border-radius: 25px;
+    border: 2px solid var(--color-neon);
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.8s ease, opacity 0.8s ease;
+}
+
+.leer-mas:hover {
+    background: var(--color-neon);
+    color: black;
+    box-shadow: 0 0 20px var(--color-neon);
+}
+
+.btn {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: black;
+    border: 2px solid var(--color-neon);
+    color: var(--color-neon);
+    font-size: 22px;
+    padding: 10px 14px;
+    border-radius: 50%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.btn:hover {
+    background: var(--color-neon);
+    color: black;
+}
+
+.indicadores {
+    margin-top: 1px;
+    z-index:5;
+}
+
+.indicadores span {
+    display: inline-block;
+    width: 12px;
+    height: 12px;
+    margin: 0 5px;
+    border-radius: 50%;
+    background: #444;
+    cursor: pointer;
+    transition: 0.3s;
+    z-index:5;
+}
+
+.indicadores span.activo {
+    background: var(--color-neon);
+    box-shadow: 0 0 10px var(--color-neon);
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto; /* permite scroll si contenido es largo */
+}
+
+.modal-content {
+  background: black;
+  border: 2px solid var(--color-neon);
+  border-radius: 20px;
+  padding: 40px 20px 60px; /* más espacio abajo para el botón */
+  max-width: 700px;
+  width: 90%;
+  box-shadow:
+    0 0 25px var(--color-neon),
+    0 0 60px var(--color-neon-strong);
+  text-align: center;
+  position: relative;
+}
+
+.modal-content h2 {
+  margin-bottom: 20px;
+}
+
+.modal-content p {
+  margin-bottom: 40px; /* espacio para botón */
+  color: #ccc;
+}
+
+.modal-content .cerrar {
+  background: var(--color-neon);
+  color: black;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-content .cerrar:hover {
+  background: white;
+  color: black;
+}
+
+.titulo-vikingo {
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    transform: translateX(-50%);
     
-    <meta property="og:type" content="website">
-    <meta property="og:locale" content="es_MX">
-    <meta property="og:url" content="https://refugiocomenzandounanuevavida.com">
-    <link rel="stylesheet" href="../styles.css">
+    font-size: 5px;
+    letter-spacing: 8px;
+    font-weight: bold;
+    text-transform: uppercase;
+
+    color: var(--color-neon);
+
+    text-shadow:
+        0 0 5px var(--color-neon),
+        0 0 15px var(--color-neon),
+        0 0 30px var(--color-neon-strong),
+        0 0 60px var(--color-neon-strong);
+
+    animation: brilloNeon 2.5s infinite alternate;
+    z-index: 10;
+}
+
+
+
+/* Animación neón */
+@keyframes brilloNeon {
+    from {
+        text-shadow:
+            0 0 5px var(--color-neon),
+            0 0 15px var(--color-neon);
+    }
+    to {
+        text-shadow:
+            0 0 10px var(--color-neon),
+            0 0 25px var(--color-neon),
+            0 0 50px var(--color-neon-strong),
+            0 0 80px var(--color-neon-strong);
+    }
+}
+
+.hero-simple {
+    position: relative;
+    width: 100%;
+    padding: 80px 0 40px 0;
+    text-align: center;
+}
+
+
+/* TITULO METAL NEON */
+
+.titulo-vikingo span {
+    font-family: 'Uncial Antiqua', cursive;
+    font-size: 85px;
+    letter-spacing: 10px;
+    position: relative;
+    display: inline-block;
+    background: linear-gradient(180deg, #ffffff, #999, #444);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+
+    text-shadow:
+        0 0 10px var(--color-neon),
+        0 0 25px var(--color-neon),
+        0 0 50px var(--color-neon-strong),
+        0 0 100px var(--color-neon-strong);
+
+    animation:forja 2.5s ease forwards,
+              brilloMistico 3s infinite alternate 2.5s;
+}
+
+/* RUNAS */
+
+.runas {
+    font-size: 30px;
+    color: var(--color-neon);
+    text-shadow: 0 0 15px var(--color-neon);
+    position: absolute;
+    top: 35px;
+}
+
+.runas.izquierda { left: 20%; }
+.runas.derecha { right: 20%; }
+
+/* HUMO */
+
+.humo {
+    position: absolute;
+    top: 0;
+    left: 50%;
+    width: 600px;
+    height: 200px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(255,255,255,0.15), transparent 70%);
+    filter: blur(40px);
+    animation: humoMove 6s infinite alternate ease-in-out;
+}
+
+/* PARTICULAS */
+
+.particulas::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 200px;
+    top: 0;
+    left: 0;
+    background-image: radial-gradient(var(--color-neon) 1px, transparent 1px);
+    background-size: 50px 50px;
+    opacity: 0.2;
+    animation: moverParticulas 20s linear infinite;
+}
+
+/* CHISPAS */
+
+.chispas::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 150px;
+    top: 20px;
+    left: 0;
+    background-image: radial-gradient(white 2px, transparent 2px);
+    background-size: 120px 120px;
+    opacity: 0.6;
+    animation: chispasMove 5s linear infinite;
+}
+
+/* ANIMACIONES */
+
+@keyframes neonPulse {
+    from {
+        text-shadow:
+            0 0 10px var(--color-neon),
+            0 0 30px var(--color-neon);
+    }
+    to {
+        text-shadow:
+            0 0 20px var(--color-neon),
+            0 0 60px var(--color-neon),
+            0 0 120px var(--color-neon-strong);
+    }
+}
+
+@keyframes humoMove {
+    from { transform: translateX(-50%) translateY(0); }
+    to { transform: translateX(-50%) translateY(20px); }
+}
+
+@keyframes moverParticulas {
+    from { background-position: 0 0; }
+    to { background-position: 500px 500px; }
+}
+
+@keyframes chispasMove {
+    from { background-position: 0 0; }
+    to { background-position: 200px 200px; }
+}
+/* ================= HERO ESPIRITUAL LIMPIO ================= */
+
+.hero-espiritual{
+    position:relative;
+    padding:70px 20px 80px; /* mucho más compacto */
+    text-align:center;
+    overflow:visible;
+}
+
+/* Fondo degradado oscuro */
+.hero-espiritual::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:radial-gradient(circle at center,
+        rgba(0,0,0,0.85) 0%,
+        rgba(0,0,0,0.7) 40%,
+        rgba(0,0,0,0.3) 70%,
+        transparent 100%);
+    z-index:1;
+}
+
+/* Símbolo vikingo gigante */
+.simbolo-fondo{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    font-size:280px;
+    color:rgba(255,255,255,0.03);
+    text-shadow:0 0 60px var(--color-neon);
+    z-index:1;
+    pointer-events:none;
+    animation:rotarSimbolo 40s linear infinite;
+}
+
+@keyframes rotarSimbolo{
+    from{transform:translate(-50%,-50%) rotate(0deg);}
+    to{transform:translate(-50%,-50%) rotate(360deg);}
+}
+
+/* Contenedor del título */
+.titulo-epico{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 60px 20px 40px;
+    text-align: center;
+    z-index: 3;
+}
+
+/* Línea sagrada conectada */
+.linea-sagrada{
+    margin:40px auto 0;
+    width:60%;
+    height:4px;
+    background:linear-gradient(to right,
+        transparent,
+        var(--color-neon),
+        white,
+        var(--color-neon),
+        transparent);
+    box-shadow:
+        0 0 20px var(--color-neon),
+        0 0 50px var(--color-neon-strong);
+        z-index:1;
+}
+
+/* Energía descendente (controlada por scroll) */
+.energia-descendente{
+    position:absolute;
+    top: calc(100% + 50px);
+    left:50%;
+    width:4px;
+    height:0;
+    transform:translateX(-50%);
+    background:linear-gradient(
+        to bottom,
+        white,
+        var(--color-neon),
+        rgba(0,255,200,0.4),
+        transparent);
+    box-shadow:
+        0 0 15px var(--color-neon),
+        0 0 40px var(--color-neon-strong);
+    z-index: 2;
+    transition:height 0.15s linear;
+}
+/* ================= ANIMACIONES ================= */
+
+/* Efecto FORJA (aparece desde fuego blanco) */
+
+@keyframes forja {
+    0% {
+        opacity: 0;
+        filter: brightness(5);
+        letter-spacing: 30px;
+    }
+    40% {
+        opacity: 1;
+        filter: brightness(2);
+    }
+    100% {
+        opacity: 1;
+        filter: brightness(1);
+        letter-spacing: 12px;
+    }
+}
+
+/* Brillo espiritual constante */
+
+@keyframes brilloMistico {
+    from {
+        text-shadow:
+            0 0 15px var(--color-neon),
+            0 0 40px var(--color-neon);
+    }
+    to {
+        text-shadow:
+            0 0 25px var(--color-neon),
+            0 0 80px var(--color-neon),
+            0 0 120px var(--color-neon-strong);
+    }
+}
+
+.hero-espiritual::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: radial-gradient(var(--color-neon) 1px, transparent 1px);
+    background-size: 80px 80px;
+    opacity: 0.08;
+    animation: moverEnergia 60s linear infinite;
+    z-index: 0;
+}
+
+@keyframes moverEnergia {
+    from { background-position: 0 0; }
+    to   { background-position: 800px 800px; }
+}
+
+/* DESTELLO EN PRIMERA SECCIÓN */
+.impacto-energia {
+    position: absolute;
+    top: -40px;
+    left: 50%;
+    width: 200px;
+    height: 200px;
+    transform: translateX(-50%);
+    background: radial-gradient(circle,
+        rgba(0,255,200,0.8),
+        rgba(0,255,200,0.4),
+        transparent 70%);
+    opacity: 0;
+    pointer-events: none;
+    z-index: 1;
+}
+
+.impacto-activo {
+    animation: destelloImpacto 0.6s ease-out forwards;
+}
+
+@keyframes destelloImpacto {
+    0% {
+        opacity: 1;
+        transform: translateX(-50%) scale(0.5);
+    }
+    100% {
+        opacity: 0;
+        transform: translateX(-50%) scale(2);
+    }
+}
+
+/* COLUMNA ESPIRITUAL GLOBAL */
+.columna-energia{
+    position:fixed;
+    top:0;
+    left:50%;
+    width:4px;
+    height:0;
+    transform:translateX(-50%);
+    background:linear-gradient(
+        to bottom,
+        transparent,
+        white,
+        var(--color-neon),
+        var(--color-neon),
+        transparent
+    );
+    box-shadow:
+        0 0 20px var(--color-neon),
+        0 0 60px var(--color-neon-strong);
+    pointer-events:none;
+    z-index:1;
+    transition:height 0.1s linear;
+}
+
+.vibrar{
+    animation:vibracion 0.4s ease;
+}
+
+@keyframes vibracion{
+    0%{transform:translateX(0);}
+    25%{transform:translateX(-3px);}
+    50%{transform:translateX(3px);}
+    75%{transform:translateX(-2px);}
+    100%{transform:translateX(0);}
+}
+
+.simbolo-reaccion{
+    animation:impactoSimbolo 0.6s ease;
+}
+
+@keyframes impactoSimbolo{
+    0%{transform:translate(-50%,-50%) scale(1);}
+    50%{transform:translate(-50%,-50%) scale(1.2);}
+    100%{transform:translate(-50%,-50%) scale(1);}
+}
+
+/* ===== SCROLL AZUL NEÓN ===== */
+
+html, body {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #ff00f2 #000;
+}
+
+/* Chrome, Edge, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: #000;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: #00f0ff !important;
+    border-radius: 10px;
+    box-shadow:
+        0 0 10px #00f0ff,
+        0 0 25px #00f0ff,
+        0 0 50px #00bfff;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+    background: #00c8ff;
+}
+/* =====================================================
+   📱 RESPONSIVE MOVIL PREMIUM
+===================================================== */
+@media (max-width: 768px) {
+  
+    .card{
+    position: relative;
+    transform: none;
+    width: 85%;
+    min-width: 260px;
+    max-width: 300px;
+    flex-shrink: 0;
+    scroll-snap-align: center;
+}
+
+        /* HERO */
+    .hero-espiritual{
+        padding: 110px 15px 60px;
+    }
+
+    /* TÍTULO */
+    .titulo-vikingo span{
+        font-size: clamp(38px, 10vw, 60px);
+        letter-spacing: 4px;
+    }
+
+    .linea-sagrada{
+        width: 85%;
+        margin-top: 25px;
+    }
+
+    .simbolo-fondo{
+        font-size: 160px;
+        opacity: 0.04;
+    }
+
+    /* SECCIONES */
+    .seccion-carrusel{
+        width: 92%;
+        padding: 25px 15px;
+        margin: 40px auto;
+    }
+
+    .seccion-carrusel h1{
+        font-size: 22px;
+    }
+
+    /* CARRUSEL */
+    .carrusel {
+        overflow: hidden;
+    }
+
+    .carrusel-track {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: auto;
+        justify-content: flex-start; /* 🔥 importante */
+        padding: 10px 0;
+        scrollbar-width: none;       /* Firefox */
+        -ms-overflow-style: none;    /* IE y Edge antiguos */
+}
+
+.carrusel-track::-webkit-scrollbar {
+    display: none;               /* Chrome, Safari, Edge */
+}
+
+    .card {
+        position: relative;
+        top: auto;
+        width: 85%;
+        min-width: 260px;
+        max-width: 300px;
+        flex-shrink: 0;
+        scroll-snap-align: center;
+    }
+
+    .card h3{
+        font-size: 18px;
+    }
+
+    .card p{
+        font-size: 13px;
+    }
+
+    /* BOTONES LATERALES MÁS PEQUEÑOS */
+    .btn{
+        display:none;
+        font-size: 18px;
+        padding: 6px 10px;
+    }
+
+    .prev{ left: 0; }
+    .next{ right: 0; }
+/* MODAL*/
+
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto; /* permite scroll interno si es muy largo */
+}
+
+.modal-content {
+  background: black;
+  border: 2px solid var(--color-neon);
+  border-radius: 20px;
+  padding: 30px 20px 60px; /* más espacio abajo para botón */
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh; /* ocupa hasta 90% de la pantalla en mobile */
+  overflow-y: auto; /* scroll interno si contenido es largo */
+  box-shadow:
+    0 0 25px var(--color-neon),
+    0 0 60px var(--color-neon-strong);
+  text-align: center;
+  position: relative;
+}
+
+/* Título del modal */
+#modal-titulo {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: var(--color-neon);
+  text-shadow:
+      0 0 10px var(--color-neon),
+      0 0 25px var(--color-neon-strong);
+}
+
+/* Contenido */
+#modal-texto {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 40px; /* espacio para botón */
+  text-align: left;
+}
+
+/* Botón cerrar */
+.modal-content .cerrar {
+  background: var(--color-neon);
+  color: black;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-content .cerrar:hover {
+  background: white;
+  color: black;
+}
+
+/* Mobile específico */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px 15px 50px;
+    max-height: 95vh;
+  }
+
+  #modal-titulo {
+    font-size: clamp(20px, 6vw, 30px);
+  }
+
+  #modal-texto {
+    font-size: 14px;
+  }
+}
+   /*menu*/
+   .menu {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        animation: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid var(--color-neon);
+        box-shadow:
+            0 0 10px var(--color-neon),
+            0 0 20px var(--color-neon);
+    }
+
+    .menu-links {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        flex-direction: column;
+        background: black;
+        border: 2px solid var(--color-neon);
+        border-radius: 12px;
+        padding: 15px;
+        display: none;
+        box-shadow:
+            0 0 10px var(--color-neon),
+            0 0 20px var(--color-neon);
+    }
+
+    .menu-links.activo {
+        display: flex;
+    }
+   
+}
+
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Uncial+Antiqua&display=swap" rel="stylesheet">
 </head>
 
 <body class="femenil">
 
-<header class="hero">
-    <picture>
+<header class="hero-espiritual">
 
-        <source srcset="../Imagenes/femenil.png" media="(max-width: 700px)">
-        
-        <!-- Imagen por defecto (PC) -->
-        <img src="../Imagenes/femenil.png" alt="Imagen principal de bienvenida">
-
-    </picture>
-
-        <!-- MENÚ -->
+    <!-- MENÚ -->
     <nav class="menu">
+   
     <div class="menu-container">
 
         <button class="menu-toggle" id="menu-toggle">
@@ -43,31 +859,387 @@
 
         <ul class="menu-links" id="menu-links">
             <li><a href="../index.html">Inicio</a></li>
-            <li><a href="enconstruccion.html">Actividades</a></li>
-            <li><a href="enconstruccion.html">Testimonios</a></li>
-            <li><a href="ubicacion.html">Mapa</a></li>
             <li><a href="varonil.html">Varonil</a></li>
             <li><a href="juvenil.html">Juvenil</a></li>
+            <li><a href="ubicacion.html">Mapa</a></li>
         </ul>
 
     </div>
 </nav>
 
+    <div class="simbolo-fondo">ᛉ</div>
+    <div class="energia-descendente"></div>
+
+    <div class="titulo-epico">
+        
+        <h1 class="titulo-vikingo">
+            <span>FEMENIL</span>
+        </h1>
+
+        <div class="linea-sagrada"></div>
+        
+    </div>
+
 </header>
 
-<!-- CONTENIDO PRINCIPAL -->
 <main class="contenido">
-    <section>
-        <h1>Actividades</h1>
-        <p>
-            En esta sección pondré información sobre actividades,
-            eventos y dinámicas realizadas para la femenil
-        </p>
-    </section>
+
+<section class="seccion-carrusel visible">
+<h1>Testimonios</h1>
+<div class="impacto-energia"></div>
+<div class="carrusel">
+<button class="btn prev">&#10094;</button>
+
+<div class="carrusel-track">
+
+<div class="card">
+<img src="../Imagenes/testimonio1.jpg">
+<h3>Historia de Vida</h3>
+<p>Proceso de transformación personal.</p>
+<button class="leer-mas"
+data-titulo="Historia de Vida"
+data-contenido="Artículo completo del primer testimonio">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio2.jpg">
+<h3>Nuevo Comienzo</h3>
+<p>Recuperando esperanza y propósito.</p>
+<button class="leer-mas"
+data-titulo="Nuevo Comienzo"
+data-contenido="Artículo completo del segundo testimonio.">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio3.jpg">
+<h3>Renacer</h3>
+<p>Un camino hacia la recuperación.</p>
+<button class="leer-mas"
+data-titulo="Renacer"
+data-contenido="Contenido ampliado del tercer testimonio.">
+Leer más
+</button>
+</div>
+
+</div>
+
+<button class="btn next">&#10095;</button>
+</div>
+
+<div class="indicadores"></div>
+
+</section>
+
+<!--Actividades-->
+
+<section class="seccion-carrusel visible">
+<h1>Actividades</h1>
+
+<div class="carrusel">
+<button class="btn prev">&#10094;</button>
+
+<div class="carrusel-track">
+
+<div class="card">
+<img src="../Imagenes/testimonio1.jpg">
+<h3>Historia de Vida</h3>
+<p>Proceso de transformación personal.</p>
+<button class="leer-mas"
+data-titulo="Historia de Vida"
+data-contenido="Artículo completo del primer testimonio.">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio2.jpg">
+<h3>Nuevo Comienzo</h3>
+<p>Recuperando esperanza y propósito.</p>
+<button class="leer-mas"
+data-titulo="Nuevo Comienzo"
+data-contenido="Artículo completo del segundo testimonio.">
+Leer más
+</button>
+</div>
+
+<div class="card">
+<img src="../Imagenes/testimonio3.jpg">
+<h3>Renacer</h3>
+<p>Un camino hacia la recuperación.</p>
+<button class="leer-mas"
+data-titulo="Renacer"
+data-contenido="Contenido ampliado del tercer testimonio.">
+Leer más
+</button>
+</div>
+
+</div>
+
+<button class="btn next">&#10095;</button>
+</div>
+
+<div class="indicadores"></div>
+
+</section>
 </main>
 
-<!-- JS -->
-<script src="../script.js"></script>
+<!-- MODAL -->
+<div class="modal" id="modal">
+  <div class="modal-content">
+    <h2 id="modal-titulo"></h2>
+    <div id="modal-texto"></div>
+    <button class="cerrar">Cerrar</button>
+  </div>
+</div>
+
+<script>
+
+/* ================= COVERFLOW ================= */
+
+document.querySelectorAll(".carrusel").forEach(carrusel => {
+
+const cards = carrusel.querySelectorAll(".card");
+const next = carrusel.querySelector(".next");
+const prev = carrusel.querySelector(".prev");
+const indicadores = carrusel.parentElement.querySelector(".indicadores");
+
+let index = 0;
+let autoplay;
+
+/* Crear indicadores */
+cards.forEach((_, i) => {
+    const dot = document.createElement("span");
+    if(i === 0) dot.classList.add("activo");
+    dot.onclick = () => { index = i; update(); };
+    indicadores.appendChild(dot);
+});
+
+function update() {
+
+    cards.forEach((card, i) => {
+
+        const offset = i - index;
+
+        /* 👇 SI ES MÓVIL → RESET COMPLETO */
+        if(matchMedia("(max-width: 768px)").matches){
+
+            card.style.transform = "none";
+            card.style.opacity = "1";
+            card.style.zIndex = "auto";
+            return;
+        }
+
+        const cardWidth = 320;
+
+        card.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+
+        card.style.transform = `
+            translateX(${offset * cardWidth}px)
+            rotateY(${offset * -40}deg)
+            scale(${offset === 0 ? 1 : 0.8})
+        `;
+
+        card.style.opacity = Math.abs(offset) > 2 ? "0" : "1";
+        card.style.zIndex = cards.length - Math.abs(offset);
+    });
+
+    indicadores.querySelectorAll("span")
+    .forEach((dot, i) => {
+        dot.classList.toggle("activo", i === index);
+    });
+}
+window.addEventListener("resize", update);
+function nextSlide() {
+    index = (index + 1) % cards.length;
+    update();
+}
+
+function prevSlide() {
+    index = (index - 1 + cards.length) % cards.length;
+    update();
+}
+
+next.onclick = nextSlide;
+prev.onclick = prevSlide;
+
+function startAutoplay() {
+    autoplay = setInterval(nextSlide, 4000);
+}
+
+function stopAutoplay() {
+    clearInterval(autoplay);
+}
+
+carrusel.addEventListener("mouseenter", stopAutoplay);
+carrusel.addEventListener("mouseleave", startAutoplay);
+
+startAutoplay();
+update();
+if (window.innerWidth <= 768) {
+
+    const track = carrusel.querySelector(".carrusel-track");
+
+    track.addEventListener("scroll", () => {
+
+        const cardWidth = cards[0].offsetWidth + 20; // ancho + gap
+        const scrollPosition = track.scrollLeft;
+
+        const newIndex = Math.round(scrollPosition / cardWidth);
+
+        if (newIndex !== index) {
+            index = newIndex;
+
+            indicadores.querySelectorAll("span")
+            .forEach((dot, i) => {
+                dot.classList.toggle("activo", i === index);
+            });
+        }
+
+    });
+}
+
+});
+
+/* ================= MENÚ RESPONSIVE ================= */
+
+const toggle = document.getElementById("menu-toggle");
+const links = document.getElementById("menu-links");
+
+toggle.addEventListener("click", () => {
+    links.classList.toggle("activo");
+});
+
+/* ================= MODAL ================= */
+
+const modal = document.getElementById("modal");
+const titulo = document.getElementById("modal-titulo");
+const texto = document.getElementById("modal-texto");
+const cerrar = modal.querySelector(".cerrar");
+
+document.querySelectorAll(".leer-mas").forEach(btn => {
+  btn.onclick = () => {
+    titulo.textContent = btn.dataset.titulo;
+    texto.textContent = btn.dataset.contenido;
+    modal.style.display = "flex";
+  };
+});
+
+cerrar.onclick = () => modal.style.display = "none";
+
+window.onclick = e => {
+  if(e.target === modal) modal.style.display = "none";
+};
+
+
+/* ================= ENERGÍA GLOBAL ESPIRITUAL ================= */
+
+
+const energiaHero = document.querySelector(".energia-descendente");
+const primeraSeccion = document.querySelector(".seccion");
+const impacto = document.querySelector(".impacto-energia");
+const simbolo = document.querySelector(".simbolo-fondo");
+
+/* Portal final */
+let portal;
+function crearPortal() {
+    portal = document.createElement("div");
+    portal.className = "portal-final";
+    document.body.appendChild(portal);
+}
+
+crearPortal();
+
+let impactoActivado = false;
+
+window.addEventListener("scroll", () => {
+
+    const scrollY = window.scrollY;
+    const alturaTotal = document.body.scrollHeight;
+    const ventana = window.innerHeight;
+
+    /* 1️⃣ Columna infinita */
+   
+
+    /* 2️⃣ Energía inicial del hero */
+    if(energiaHero){
+        const hero = document.querySelector(".hero-espiritual");
+        if(hero){
+            const heroHeight = hero.offsetHeight;
+            if(scrollY < heroHeight){
+                energiaHero.style.height = scrollY + "px";
+            }
+        }
+    }
+
+    /* 3️⃣ Impacto primera sección */
+    if(primeraSeccion && impacto){
+        const seccionTop = primeraSeccion.getBoundingClientRect().top;
+
+        if(seccionTop <= 120 && !impactoActivado){
+
+            impacto.classList.add("impacto-activo");
+            primeraSeccion.classList.add("vibrar");
+
+            if(simbolo){
+                simbolo.classList.add("simbolo-reaccion");
+                setTimeout(()=>{
+                    simbolo.classList.remove("simbolo-reaccion");
+                },600);
+            }
+
+            /* Ramificaciones */
+            crearRamificaciones();
+
+            setTimeout(()=>{
+                primeraSeccion.classList.remove("vibrar");
+            },600);
+
+            impactoActivado = true;
+        }
+    }
+
+    /* 4️⃣ Portal final al llegar abajo */
+    if(scrollY + ventana >= alturaTotal - 50){
+        if(portal){
+            portal.classList.add("portal-activo");
+        }
+    }
+
+});
+
+
+/* ================= RAMIFICACIONES ================= */
+
+function crearRamificaciones(){
+
+    for(let i=0; i<6; i++){
+
+        const rama = document.createElement("div");
+        rama.className = "rama-energia";
+
+        rama.style.left = "50%";
+        rama.style.top = window.scrollY + window.innerHeight/2 + "px";
+
+        rama.style.transform = `
+            translateX(-50%)
+            rotate(${Math.random()*120 - 60}deg)
+        `;
+
+        document.body.appendChild(rama);
+
+        setTimeout(()=>{
+            rama.remove();
+        },800);
+    }
+
+}
+
+</script>
+
 </body>
 </html>
 
