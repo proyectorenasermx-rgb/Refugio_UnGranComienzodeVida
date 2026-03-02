@@ -10,6 +10,43 @@
 
 <style>
 
+.menu-links{
+    display:flex;
+    gap:25px;
+}
+
+@media (max-width:768px){
+
+    .menu-links{
+        position:absolute;
+        top:70px;
+        right:20px;
+        background:black;
+        flex-direction:column;
+        padding:20px;
+        border:1px solid var(--color-neon);
+        display:none;
+    }
+
+    .menu-links.activo{
+        display:flex;
+    }
+
+    .menu-toggle{
+        display:block;
+        font-size:24px;
+        background:none;
+        border:none;
+        color:var(--color-neon);
+        cursor:pointer;
+    }
+
+}
+@media (min-width:769px){
+    .menu-toggle{
+        display:none;
+    }
+}
 /* =====================================================
    🎠 SECCIÓN CARRUSEL ULTRA PREMIUM
 ===================================================== */
@@ -363,7 +400,7 @@
 
 .hero-espiritual{
     position:relative;
-    padding:90px 20px 80px; /* antes 140px */
+    padding:70px 20px 80px; /* mucho más compacto */
     text-align:center;
     overflow:visible;
 }
@@ -390,7 +427,7 @@
     font-size:280px;
     color:rgba(255,255,255,0.03);
     text-shadow:0 0 60px var(--color-neon);
-    z-index:1;
+    z-index:0;
     pointer-events:none;
     animation:rotarSimbolo 40s linear infinite;
 }
@@ -408,6 +445,7 @@
     position: relative;
     padding: 60px 20px 40px;
     text-align: center;
+    z-index: 3;
 }
 
 /* Título vikingo */
@@ -481,7 +519,7 @@
 /* Energía descendente (controlada por scroll) */
 .energia-descendente{
     position:absolute;
-    top: calc(100% + 120px);
+    top: calc(100% + 50px);
     left:50%;
     width:4px;
     height:0;
@@ -495,7 +533,7 @@
     box-shadow:
         0 0 15px var(--color-neon),
         0 0 40px var(--color-neon-strong);
-    z-index:1;
+    z-index: 2;
     transition:height 0.15s linear;
 }
 /* ================= ANIMACIONES ================= */
@@ -767,15 +805,12 @@ body::-webkit-scrollbar-thumb:hover {
 </head>
 
 <body class="varonil fondo-vikingo">
-    <div class="columna-energia"></div>
 
 <header class="hero-espiritual">
 
-    <header class="hero">
-   
-
-        <!-- MENÚ -->
+    <!-- MENÚ -->
     <nav class="menu">
+   
     <div class="menu-container">
 
         <button class="menu-toggle" id="menu-toggle">
@@ -793,8 +828,6 @@ body::-webkit-scrollbar-thumb:hover {
 
     </div>
 </nav>
-
-</header>
 
     <div class="simbolo-fondo">ᛉ</div>
     <div class="energia-descendente"></div>
@@ -953,7 +986,8 @@ function update() {
 
         const offset = i - index;
 
-const cardWidth = window.innerWidth <= 768 ? 260 : 320;
+if(window.innerWidth <= 768) return;
+const cardWidth = 320;
 
 card.style.transition = "transform 0.8s ease, opacity 0.8s ease";
 
@@ -1002,6 +1036,14 @@ update();
 
 });
 
+/* ================= MENÚ RESPONSIVE ================= */
+
+const toggle = document.getElementById("menu-toggle");
+const links = document.getElementById("menu-links");
+
+toggle.addEventListener("click", () => {
+    links.classList.toggle("activo");
+});
 
 /* ================= MODAL ================= */
 
@@ -1023,7 +1065,7 @@ window.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
 
 /* ================= ENERGÍA GLOBAL ESPIRITUAL ================= */
 
-const columna = document.querySelector(".columna-energia");
+
 const energiaHero = document.querySelector(".energia-descendente");
 const primeraSeccion = document.querySelector(".seccion");
 const impacto = document.querySelector(".impacto-energia");
@@ -1048,9 +1090,7 @@ window.addEventListener("scroll", () => {
     const ventana = window.innerHeight;
 
     /* 1️⃣ Columna infinita */
-    if(columna){
-        columna.style.height = scrollY + ventana + "px";
-    }
+   
 
     /* 2️⃣ Energía inicial del hero */
     if(energiaHero){
