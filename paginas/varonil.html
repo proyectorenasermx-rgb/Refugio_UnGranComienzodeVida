@@ -799,6 +799,45 @@ body::-webkit-scrollbar-thumb:hover {
     font-size: 14px;
   }
 }
+   /*menu*/
+   .menu {
+        background: transparent;
+        border: none;
+        box-shadow: none;
+        padding: 0;
+        animation: none;
+    }
+
+    .menu-toggle {
+        display: block;
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        border: 2px solid var(--color-neon);
+        box-shadow:
+            0 0 10px var(--color-neon),
+            0 0 20px var(--color-neon);
+    }
+
+    .menu-links {
+        position: absolute;
+        top: 80px;
+        right: 0;
+        flex-direction: column;
+        background: black;
+        border: 2px solid var(--color-neon);
+        border-radius: 12px;
+        padding: 15px;
+        display: none;
+        box-shadow:
+            0 0 10px var(--color-neon),
+            0 0 20px var(--color-neon);
+    }
+
+    .menu-links.activo {
+        display: flex;
+    }
+   
 }
 
 </style>
@@ -1205,3 +1244,4 @@ function crearRamificaciones(){
 
 </body>
 </html>
+
