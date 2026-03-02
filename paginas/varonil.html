@@ -10,43 +10,7 @@
 
 <style>
 
-.menu-links{
-    display:flex;
-    gap:25px;
-}
 
-@media (max-width:768px){
-
-    .menu-links{
-        position:absolute;
-        top:70px;
-        right:20px;
-        background:black;
-        flex-direction:column;
-        padding:20px;
-        border:1px solid var(--color-neon);
-        display:none;
-    }
-
-    .menu-links.activo{
-        display:flex;
-    }
-
-    .menu-toggle{
-        display:block;
-        font-size:24px;
-        background:none;
-        border:none;
-        color:var(--color-neon);
-        cursor:pointer;
-    }
-
-}
-@media (min-width:769px){
-    .menu-toggle{
-        display:none;
-    }
-}
 /* =====================================================
    🎠 SECCIÓN CARRUSEL ULTRA PREMIUM
 ===================================================== */
@@ -60,7 +24,7 @@
     width: 70%;
     max-width: 1200px;
     text-align: center;
-
+    position: relative;
     background: rgba(0, 0, 0, 0.35);
     backdrop-filter: blur(12px);
     padding: 40px;
@@ -69,15 +33,11 @@
     box-shadow:
         0 0 40px rgba(0,0,0,0.8),
         0 0 60px var(--color-neon-strong);
-
     opacity: 1;
     transform: none;
     z-index: 5;
 }
-.seccion-carrusel{
-    position: relative;
-    z-index: 5;
-}
+
 
 .seccion-carrusel.visible {
     opacity: 1;
@@ -151,7 +111,7 @@
     background: transparent;
     color: white;
     cursor: pointer;
-    transition: 0.3s ease;
+    transition: transform 0.8s ease, opacity 0.8s ease;
 }
 
 .leer-mas:hover {
@@ -205,47 +165,62 @@
 }
 
 .modal {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.9);
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
-    z-index: 1000;
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.9);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto; /* permite scroll si contenido es largo */
 }
 
 .modal-content {
-    background: black;
-    border: 2px solid var(--color-neon);
-    border-radius: 20px;
-    padding: 40px;
-    max-width: 700px;
-    width: 90%;
-    box-shadow:
-        0 0 25px var(--color-neon),
-        0 0 60px var(--color-neon-strong);
+  background: black;
+  border: 2px solid var(--color-neon);
+  border-radius: 20px;
+  padding: 40px 20px 60px; /* más espacio abajo para el botón */
+  max-width: 700px;
+  width: 90%;
+  box-shadow:
+    0 0 25px var(--color-neon),
+    0 0 60px var(--color-neon-strong);
+  text-align: center;
+  position: relative;
 }
 
 .modal-content h2 {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
-.cerrar {
-    position: absolute;
-    right: 25px;
-    top: 20px;
-    font-size: 28px;
-    color: var(--color-neon);
+.modal-content p {
+  margin-bottom: 40px; /* espacio para botón */
+  color: #ccc;
+}
+
+.modal-content .cerrar {
+  background: var(--color-neon);
+  color: black;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-content .cerrar:hover {
+  background: white;
+  color: black;
 }
 
 .titulo-vikingo {
     position: absolute;
-    top: 40px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%);
     
-    font-size: 70px;
+    font-size: 5px;
     letter-spacing: 8px;
     font-weight: bold;
     text-transform: uppercase;
@@ -306,7 +281,8 @@
         0 0 50px var(--color-neon-strong),
         0 0 100px var(--color-neon-strong);
 
-    animation: neonPulse 3s infinite alternate;
+    animation:forja 2.5s ease forwards,
+              brilloMistico 3s infinite alternate 2.5s;
 }
 
 /* RUNAS */
@@ -415,7 +391,7 @@
         rgba(0,0,0,0.7) 40%,
         rgba(0,0,0,0.3) 70%,
         transparent 100%);
-    z-index:0;
+    z-index:1;
 }
 
 /* Símbolo vikingo gigante */
@@ -427,7 +403,7 @@
     font-size:280px;
     color:rgba(255,255,255,0.03);
     text-shadow:0 0 60px var(--color-neon);
-    z-index:0;
+    z-index:1;
     pointer-events:none;
     animation:rotarSimbolo 40s linear infinite;
 }
@@ -446,57 +422,6 @@
     padding: 60px 20px 40px;
     text-align: center;
     z-index: 3;
-}
-
-/* Título vikingo */
-.titulo-vikingo span{
-    font-family:'Uncial Antiqua',cursive;
-    font-size:90px;
-    letter-spacing:12px;
-    display:inline-block;
-    background:linear-gradient(180deg,#fff,#aaa,#555);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    text-shadow:
-        0 0 10px var(--color-neon),
-        0 0 30px var(--color-neon),
-        0 0 70px var(--color-neon-strong);
-    opacity:0;
-    animation:forja 2.5s ease forwards,
-              brilloMistico 3s infinite alternate 2.5s;
-}
-
-/* Animación forja */
-@keyframes forja{
-    0%{
-        opacity:0;
-        filter:brightness(5);
-        letter-spacing:30px;
-    }
-    40%{
-        opacity:1;
-        filter:brightness(2);
-    }
-    100%{
-        opacity:1;
-        filter:brightness(1);
-        letter-spacing:12px;
-    }
-}
-
-/* Brillo místico continuo */
-@keyframes brilloMistico{
-    from{
-        text-shadow:
-            0 0 15px var(--color-neon),
-            0 0 40px var(--color-neon);
-    }
-    to{
-        text-shadow:
-            0 0 25px var(--color-neon),
-            0 0 80px var(--color-neon),
-            0 0 120px var(--color-neon-strong);
-    }
 }
 
 /* Línea sagrada conectada */
@@ -667,42 +592,54 @@
     100%{transform:translate(-50%,-50%) scale(1);}
 }
 
+/* ===== SCROLL AZUL NEÓN ===== */
+
+html, body {
+    scrollbar-width: thin; /* Firefox */
+    scrollbar-color: #003cff #000;
+}
+
+/* Chrome, Edge, Opera */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+    width: 10px;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+    background: #000;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+    background: #00f0ff !important;
+    border-radius: 10px;
+    box-shadow:
+        0 0 10px #00f0ff,
+        0 0 25px #00f0ff,
+        0 0 50px #00bfff;
+}
+
+html::-webkit-scrollbar-thumb:hover,
+body::-webkit-scrollbar-thumb:hover {
+    background: #00c8ff;
+}
 /* =====================================================
    📱 RESPONSIVE MOVIL PREMIUM
 ===================================================== */
 @media (max-width: 768px) {
-    @media (max-width: 768px) {
-
-    .carrusel-track{
-        position: relative;
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        height: auto;
-    }
-
+  
     .card{
-        position: relative; /* 👈 clave */
-        transform: none !important;
-        width: 85%;
-        min-width: 260px;
-        max-width: 300px;
-        flex-shrink: 0;
-        scroll-snap-align: center;
-    }
-
-    .btn{
-        display:none; /* ocultamos flechas en móvil */
-    }
-
+    position: relative;
+    transform: none;
+    width: 85%;
+    min-width: 260px;
+    max-width: 300px;
+    flex-shrink: 0;
+    scroll-snap-align: center;
 }
 
-    .carrusel {
-        padding-bottom: 60px;
-    }
-    /* HERO */
+        /* HERO */
     .hero-espiritual{
         padding: 110px 15px 60px;
     }
@@ -735,18 +672,34 @@
     }
 
     /* CARRUSEL */
-    .carrusel-track{
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: visible;
+    .carrusel {
+        overflow: hidden;
+    }
+
+    .carrusel-track {
+        display: flex;
+        gap: 20px;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        height: auto;
+        justify-content: flex-start; /* 🔥 importante */
+        padding: 10px 0;
+        scrollbar-width: none;       /* Firefox */
+        -ms-overflow-style: none;    /* IE y Edge antiguos */
 }
 
-    .card{
+.carrusel-track::-webkit-scrollbar {
+    display: none;               /* Chrome, Safari, Edge */
+}
+
+    .card {
+        position: relative;
+        top: auto;
         width: 85%;
-        max-width: 280px;
-        padding: 18px;
+        min-width: 260px;
+        max-width: 300px;
+        flex-shrink: 0;
+        scroll-snap-align: center;
     }
 
     .card h3{
@@ -759,45 +712,93 @@
 
     /* BOTONES LATERALES MÁS PEQUEÑOS */
     .btn{
+        display:none;
         font-size: 18px;
         padding: 6px 10px;
     }
 
     .prev{ left: 0; }
     .next{ right: 0; }
+/* MODAL*/
 
-}
-/* ===== SCROLL AZUL NEÓN ===== */
-
-html, body {
-    scrollbar-width: thin; /* Firefox */
-    scrollbar-color: #003cff #000;
-}
-
-/* Chrome, Edge, Opera */
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-    width: 10px;
-}
-
-html::-webkit-scrollbar-track,
-body::-webkit-scrollbar-track {
-    background: #000;
+.modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.95);
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto; /* permite scroll interno si es muy largo */
 }
 
-html::-webkit-scrollbar-thumb,
-body::-webkit-scrollbar-thumb {
-    background: #00f0ff !important;
-    border-radius: 10px;
-    box-shadow:
-        0 0 10px #00f0ff,
-        0 0 25px #00f0ff,
-        0 0 50px #00bfff;
+.modal-content {
+  background: black;
+  border: 2px solid var(--color-neon);
+  border-radius: 20px;
+  padding: 30px 20px 60px; /* más espacio abajo para botón */
+  max-width: 700px;
+  width: 90%;
+  max-height: 90vh; /* ocupa hasta 90% de la pantalla en mobile */
+  overflow-y: auto; /* scroll interno si contenido es largo */
+  box-shadow:
+    0 0 25px var(--color-neon),
+    0 0 60px var(--color-neon-strong);
+  text-align: center;
+  position: relative;
 }
 
-html::-webkit-scrollbar-thumb:hover,
-body::-webkit-scrollbar-thumb:hover {
-    background: #00c8ff;
+/* Título del modal */
+#modal-titulo {
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+  color: var(--color-neon);
+  text-shadow:
+      0 0 10px var(--color-neon),
+      0 0 25px var(--color-neon-strong);
+}
+
+/* Contenido */
+#modal-texto {
+  color: #ccc;
+  font-size: 14px;
+  margin-bottom: 40px; /* espacio para botón */
+  text-align: left;
+}
+
+/* Botón cerrar */
+.modal-content .cerrar {
+  background: var(--color-neon);
+  color: black;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 25px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.modal-content .cerrar:hover {
+  background: white;
+  color: black;
+}
+
+/* Mobile específico */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    padding: 20px 15px 50px;
+    max-height: 95vh;
+  }
+
+  #modal-titulo {
+    font-size: clamp(20px, 6vw, 30px);
+  }
+
+  #modal-texto {
+    font-size: 14px;
+  }
+}
 }
 
 </style>
@@ -951,11 +952,11 @@ Leer más
 
 <!-- MODAL -->
 <div class="modal" id="modal">
-<div class="modal-content">
-<span class="cerrar">&times;</span>
-<h2 id="modal-titulo"></h2>
-<p id="modal-texto"></p>
-</div>
+  <div class="modal-content">
+    <h2 id="modal-titulo"></h2>
+    <div id="modal-texto"></div>
+    <button class="cerrar">Cerrar</button>
+  </div>
 </div>
 
 <script>
@@ -986,19 +987,27 @@ function update() {
 
         const offset = i - index;
 
-if(window.innerWidth <= 768) return;
-const cardWidth = 320;
+        /* 👇 SI ES MÓVIL → RESET COMPLETO */
+        if(matchMedia("(max-width: 768px)").matches){
 
-card.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+            card.style.transform = "none";
+            card.style.opacity = "1";
+            card.style.zIndex = "auto";
+            return;
+        }
 
-card.style.transform = `
-    translateX(${offset * cardWidth}px)
-    rotateY(${offset * -40}deg)
-    scale(${offset === 0 ? 1 : 0.8})
-`;
+        const cardWidth = 320;
 
-card.style.opacity = Math.abs(offset) > 2 ? "0" : "1";
-card.style.zIndex = cards.length - Math.abs(offset);
+        card.style.transition = "transform 0.8s ease, opacity 0.8s ease";
+
+        card.style.transform = `
+            translateX(${offset * cardWidth}px)
+            rotateY(${offset * -40}deg)
+            scale(${offset === 0 ? 1 : 0.8})
+        `;
+
+        card.style.opacity = Math.abs(offset) > 2 ? "0" : "1";
+        card.style.zIndex = cards.length - Math.abs(offset);
     });
 
     indicadores.querySelectorAll("span")
@@ -1006,7 +1015,7 @@ card.style.zIndex = cards.length - Math.abs(offset);
         dot.classList.toggle("activo", i === index);
     });
 }
-
+window.addEventListener("resize", update);
 function nextSlide() {
     index = (index + 1) % cards.length;
     update();
@@ -1033,6 +1042,28 @@ carrusel.addEventListener("mouseleave", startAutoplay);
 
 startAutoplay();
 update();
+if (window.innerWidth <= 768) {
+
+    const track = carrusel.querySelector(".carrusel-track");
+
+    track.addEventListener("scroll", () => {
+
+        const cardWidth = cards[0].offsetWidth + 20; // ancho + gap
+        const scrollPosition = track.scrollLeft;
+
+        const newIndex = Math.round(scrollPosition / cardWidth);
+
+        if (newIndex !== index) {
+            index = newIndex;
+
+            indicadores.querySelectorAll("span")
+            .forEach((dot, i) => {
+                dot.classList.toggle("activo", i === index);
+            });
+        }
+
+    });
+}
 
 });
 
@@ -1050,17 +1081,21 @@ toggle.addEventListener("click", () => {
 const modal = document.getElementById("modal");
 const titulo = document.getElementById("modal-titulo");
 const texto = document.getElementById("modal-texto");
+const cerrar = modal.querySelector(".cerrar");
 
 document.querySelectorAll(".leer-mas").forEach(btn => {
-    btn.onclick = () => {
-        titulo.textContent = btn.dataset.titulo;
-        texto.textContent = btn.dataset.contenido;
-        modal.style.display = "flex";
-    };
+  btn.onclick = () => {
+    titulo.textContent = btn.dataset.titulo;
+    texto.textContent = btn.dataset.contenido;
+    modal.style.display = "flex";
+  };
 });
 
-document.querySelector(".cerrar").onclick = () => modal.style.display = "none";
-window.onclick = e => { if(e.target === modal) modal.style.display = "none"; };
+cerrar.onclick = () => modal.style.display = "none";
+
+window.onclick = e => {
+  if(e.target === modal) modal.style.display = "none";
+};
 
 
 /* ================= ENERGÍA GLOBAL ESPIRITUAL ================= */
