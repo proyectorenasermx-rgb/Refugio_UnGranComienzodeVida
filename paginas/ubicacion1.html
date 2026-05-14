@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ubicación</title>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<style>
+
+/* ================================
+   💜 NEÓN MORADO
+================================ */
+
+:root {
+    --color-neon: #b026ff;
+    --color-neon-strong: #7a00cc;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: white;
+    background-image: url("/Imagenes/fondo-vikingo.png");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-color: #140c08;
+}
+
+/* ================================
+   🗺 CONTENEDOR MAPA
+================================ */
+
+.mapa-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 1700px;
+    margin: 130px auto auto auto;
+    padding: 25px;
+    border-radius: 25px;
+    border: 3px solid var(--color-neon);
+    background: rgba(0,0,0,0.6);
+    box-shadow:
+        0 0 20px var(--color-neon),
+        0 0 50px var(--color-neon-strong);
+}
+
+.titulo-seccion {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+    text-shadow:
+        0 0 10px var(--color-neon),
+        0 0 30px var(--color-neon-strong);
+}
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 20px;
+}
+
+/* ================================
+   🔥 BOTÓN INICIO
+================================ */
+
+.btn-inicio {
+    position: absolute;
+    padding: 10px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: #b026ff;
+    color: black;
+    box-shadow:
+        0 0 10px #b026ff,
+        0 0 25px #7a00cc;
+    transition: 0.3s ease;
+    z-index: 100;
+
+    /* 🔥 Ahora pegado al MARCO */
+    bottom: -15px;
+    left: -15px;
+}
+
+/* 📱 móvil */
+@media (max-width: 768px) {
+
+    body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        height: 100vh;
+    }
+
+    .mapa-wrapper {
+        width: 95%;          /* 🔥 un poco más pequeño */
+        height: 85%;        /* 🔥 más compacto */
+        padding: 25px;
+        margin: 130px auto 80px auto;
+    }
+
+    #map {
+        height: 85%;
+    }
+
+    .titulo-seccion {
+        font-size: 2rem;     /* 🔥 ligeramente más chico */
+        margin: 15px 0;
+    }
+}
+ .btn-inicio {
+    position: absolute;
+    padding: 10px 18px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    letter-spacing: 2px;
+    background: #b026ff;
+    color: black;
+    box-shadow:
+        0 0 10px #b026ff,
+        0 0 25px #7a00cc;
+    transition: 0.3s ease;
+    z-index: 1000;
+
+    /* 🔥 Ahora pegado al MARCO */
+    bottom: -15px;
+    left: -15px;
+}
+    
+/* ================================
+   💜 POPUP NEÓN
+================================ */
+
+.leaflet-popup-content-wrapper {
+    background: black;
+    border: 2px solid var(--color-neon);
+    box-shadow:
+        0 0 15px var(--color-neon),
+        0 0 30px var(--color-neon-strong);
+    border-radius: 15px;
+    color: white;
+}
+
+.leaflet-popup-tip {
+    background: var(--color-neon);
+}
+
+</style>
+</head>
+
+<body>
+    
+
+<div class="mapa-wrapper">
+
+    <h1 class="titulo-seccion">UBICACIÓN</h1>
+
+    <a href="/index.html" class="btn-inicio">INICIO</a>
+
+    <div id="map"></div>
+
+</div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+
+/* 🗺 Inicializar mapa */
+const map = L.map('map');
+
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '© OpenStreetMap'
+}).addTo(map);
+
+/* 🎯 Iconos */
+const iconVaronil = L.icon({
+    iconUrl: '/Imagenes/varonil-map.png',
+    iconSize: [50, 50],
+    iconAnchor: [25, 50],
+    popupAnchor: [0, -45]
+});
+
+const iconFemenil = L.icon({
+    iconUrl: '/Imagenes/femenil-map.png',
+    iconSize: [50, 50],
+    iconAnchor: [25, 50],
+    popupAnchor: [0, -45]
+});
+
+const iconJuvenil = L.icon({
+    iconUrl: '/Imagenes/juvenil-map.png',
+    iconSize: [50, 50],
+    iconAnchor: [25, 50],
+    popupAnchor: [0, -45]
+});
+
+/* 📍 Popup */
+function crearPopup(titulo, lat, lng) {
+    return `
+        <div style="text-align:center;">
+            <h3 style="margin:0 0 10px 0; color:#b026ff;">${titulo}</h3>
+            <a href="https://www.google.com/maps/dir/?api=1&destination=${lat},${lng}"
+               target="_blank"
+               style="
+                    display:inline-block;
+                    padding:8px 15px;
+                    border-radius:20px;
+                    background:#b026ff;
+                    color:black;
+                    text-decoration:none;
+                    font-weight:bold;
+                    box-shadow:0 0 10px #b026ff;">
+               Cómo llegar
+            </a>
+        </div>
+    `;
+}
+
+/* 📌 Marcadores + auto ajuste */
+const marcadores = [];
+
+marcadores.push(
+    L.marker([19.28684691371926, -98.90239290999088], { icon: iconVaronil })
+        .addTo(map)
+        .bindPopup(crearPopup("Sede Varonil", 19.28684691371926, -98.90239290999088))
+);
+
+marcadores.push(
+    L.marker([19.28684994039256, -98.91774816224923], { icon: iconFemenil })
+        .addTo(map)
+        .bindPopup(crearPopup("Sede Femenil", 19.28684994039256, -98.91774816224923))
+);
+
+marcadores.push(
+    L.marker([19.25924621004502, -98.91544257055163], { icon: iconJuvenil })
+        .addTo(map)
+        .bindPopup(crearPopup("Sede Juvenil", 19.25924621004502, -98.91544257055163))
+);
+
+const grupo = L.featureGroup(marcadores);
+map.fitBounds(grupo.getBounds(), { padding: [50, 50] });
+
+</script>
+
+</body>
+</html>
