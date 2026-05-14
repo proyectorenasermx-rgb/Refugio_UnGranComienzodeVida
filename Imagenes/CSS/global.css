@@ -1,0 +1,49 @@
+:root{
+    --scroll-thumb: rgb(202, 21, 21);
+    --scroll-track: black;
+    --scroll-glow: rgb(202, 21, 21);
+}
+
+
+
+.tema-global {
+    --bg: #000000;
+    --menu-texto: #7a00cc;
+    --menu-hover: rgb(14, 11, 190);
+    --color-neon: rgb(255, 255, 255);
+    --color-bg-soft: #693ad6;
+    --color-neon-strong: #6F4E37;
+    --color-scroll: #6F4E37;
+}
+
+
+.tema-femenil {
+    --bg: #000000;
+    --menu-texto: #7a00cc;
+    --menu-hover: rgb(14, 11, 190);
+    --color-neon:#f11079d2;
+    --color-bg-soft: #8cdb0c;
+    --color-neon-strong: #ff2626;
+    --contenedor: #ff00f2;
+    --color-scroll: #ff00f2;
+}
+
+
+.tema-varonil {
+    --bg: #000000;
+    --menu-texto: #f13636de;
+    --menu-hover: rgb(14, 11, 190);
+    --color-neon:#0d00c9;
+    --color-bg-soft: #8cdb0c;
+    --color-neon-strong: #530505;
+    --contenedor: #0398fc;
+    --color-scroll: #190572;
+}
+
+body.tema-varonil{
+    --scroll-glow: #041a80;
+}
+
+body.tema-femenil{
+    --scroll-glow: #ff4da6;
+}
